@@ -20,7 +20,8 @@ setuptools.setup(
    'magicgui',
    'scikit-image',
    'numpy',
-   'tiffile'
+   'tiffile',
+    'git+https://github.com/pswapnesh/MiSIC.git'
     ],
     dependency_links=['https://github.com/pswapnesh/MiSIC.git'],
     entry_points = {
