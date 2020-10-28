@@ -79,7 +79,7 @@ def main():
                 gdict["gpos"] = p
                 gdict["gsave_all"] = process_all
 
-                updatemeta(gdict, 0)
+                #updatemeta(gdict, 0)
                 return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
 
             else:
@@ -95,7 +95,7 @@ def main():
                 gdict["gpos"] = p
                 gdict["gsave_all"] = process_all
 
-                updatemeta(gdict, 0)
+                #updatemeta(gdict, 0)
                 return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
         
 

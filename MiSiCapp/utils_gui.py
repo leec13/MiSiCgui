@@ -38,7 +38,7 @@ gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, 
 #thresh = 220
 
 def updatemeta(metadict = gdict, idx = 1):
-    viewer.layers[idx].metadate = metadict
+    viewer.layers[idx].metadata = metadict
 
 
 def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, threshold=220):
