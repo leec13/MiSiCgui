@@ -1,6 +1,7 @@
 # MiSiCapp
-GUI for MiSiC tool
-based on MiSiC by S. Panigrahi ("https://github.com/pswapnesh/MiSiC")
+A GUI for MiSiC tool
+
+Based on MiSiC created by S. Panigrahi ("https://github.com/pswapnesh/MiSiC")
 
 ## Installation
 Requires version python version 3.7
@@ -8,14 +9,25 @@ Requires version python version 3.7
 pip install git+https://github.com/leec13/MiSiCapp.git
 
 we recommand to create a specific envronement with conda/miniconda, exemple:
-conda create --name MiSiCapp git python=3.7
-conda activate MiSiCapp
-pip install git+https://github.com/leec13/MiSiCapp.git
-MISIC
 
+conda create --name MiSiCapp git python=3.7
+
+conda activate MiSiCapp
+
+pip install git+https://github.com/leec13/MiSiCapp.git
+
+MISIC
 ## Usage
 
 ### command line
 MISIC
-Drag and drop images and click "get_mask" button
+
+### How to use it
+Drag and drop one images
+
+Select a default directory
+
+click "get_mask" button
+
+To process all slides of one stack slect "process all"
 
