@@ -22,7 +22,7 @@ setuptools.setup(
    'numpy',
    'tiffile'
     ],
-    dependency_links=['git+https://github.com/pswapnesh/MiSIC.git'],
+    dependency_links=['MiSiC @ git+https://github.com/pswapnesh/MiSIC.git'],
     entry_points = {
         'console_scripts': ['MISIC=MiSiCapp.MiSiCapp_main:main'],
     },
