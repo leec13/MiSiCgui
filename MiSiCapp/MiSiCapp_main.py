@@ -21,7 +21,7 @@ from PyQt5.QtCore import Qt
 
 from MiSiC.MiSiC import *
 
-from MiSiCapp import *.*
+from MiSiCapp import *
 
 gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 #thresh = 220
