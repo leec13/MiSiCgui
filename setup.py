@@ -18,8 +18,6 @@ setuptools.setup(
    'PyQt5',
    'napari',
    'magicgui',
-   'scikit-image',
-   'numpy',
    'tiffile',
    'MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'
     ],
