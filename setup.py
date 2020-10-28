@@ -17,7 +17,10 @@ setuptools.setup(
     install_requires=[
    'PyQt5',
    'napari',
-   'magicgui'
+   'magicgui',
+   'scikit-image',
+   'numpy',
+   'tiffile'
     ],
     dependency_links=['https://github.com/pswapnesh/MiSIC.git'],
     entry_points = {
