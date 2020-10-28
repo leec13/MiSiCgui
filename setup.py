@@ -20,10 +20,9 @@ setuptools.setup(
    'magicgui',
    'scikit-image',
    'numpy',
-   'tiffile',
-    'git+https://github.com/pswapnesh/MiSIC.git'
+   'tiffile'
     ],
-    dependency_links=['https://github.com/pswapnesh/MiSIC.git'],
+    dependency_links=['git+https://github.com/pswapnesh/MiSIC.git'],
     entry_points = {
         'console_scripts': ['MISIC=MiSiCapp.MiSiCapp_main:main'],
     },
