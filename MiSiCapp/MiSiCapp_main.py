@@ -80,7 +80,7 @@ def main():
                 gdict["gsave_all"] = process_all
 
                 #updatemeta(gdict, 0)
-                return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
+                return seg_img(img, misic, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
 
             else:
                 if layer.data.ndim == 5 : img = layer.data[p[0], p[1], p[2],:,:]
@@ -96,7 +96,7 @@ def main():
                 gdict["gsave_all"] = process_all
 
                 #updatemeta(gdict, 0)
-                return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
+                return seg_img(img, misic, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
         
 
         viewer.grid_view()

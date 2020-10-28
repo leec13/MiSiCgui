@@ -41,7 +41,7 @@ def updatemeta(metadict = gdict, idx = 1):
     viewer.layers[idx].metadata = metadict
 
 
-def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, threshold=220):
+def seg_img(im, misic, scale=1, noise="0.000", invert=True, frame=0, save=False, threshold=220):
     
     noise = float(noise)
     rtim = np.zeros(gdict["gdims"])
