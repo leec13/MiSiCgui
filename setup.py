@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="MiSiCapp", # Replace with your own username
-    version="0.3.0",
+    name="MiSiCgui", # Replace with your own username
+    version="0.3.1",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
@@ -23,7 +23,7 @@ setuptools.setup(
     ],
     dependency_links=['MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'],
     entry_points = {
-        'console_scripts': ['MISIC=MiSiCapp.MiSiCapp_main:main'],
+        'console_scripts': ['MISIC=MiSiCapp.MiSiCgui_main:main'],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
