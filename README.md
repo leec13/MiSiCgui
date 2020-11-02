@@ -1,4 +1,4 @@
-# MiSiCapp
+# MiSiCgui
 A GUI for MiSiC tool
 
 Based on MiSiC created by S. Panigrahi ("https://github.com/pswapnesh/MiSiC")
