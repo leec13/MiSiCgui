@@ -16,7 +16,7 @@ from napari.layers import Image
 from magicgui import magicgui
 from magicgui._qt.widgets import QDoubleSlider
 from magicgui import event_loop, magicgui
-from PyQt5.QtWidgets import QDoubleSpinBox
+from PyQt5.QtWidgets import QDoubleSpinBox, QSlider
 from PyQt5.QtCore import Qt
 
 from MiSiC.MiSiC import *
@@ -173,29 +173,43 @@ def main():
         #viewer.layers.events.changed.connect(lambda x: gui.refresh_choices("layer"))
         viewer.layers.events.changed.connect(updatelayer)
 
-        #viewer.layers[1].metadata = viewer.layers[0].metadata
 
-        #threshold = {'minimum':10, 'maximum':255}
-        #, threshold = 220.00
-
-        @magicgui(threshold = {'minimum':10, 'maximum':255})
+        @magicgui(
+            auto_call=True,
+            threshold = {'widget_type': QSlider, 'minimum': 1, 'maximum': 255, 'orientation':Qt.Horizontal, "fixedWidth": 800})
         def make_labels(threshold = 220):
             return threshold
+        gui1 = make_labels.Gui(show = True)
+        viewer.window.add_dock_widget(gui1)
+        gui1.threshold_changed.connect(changelabels)
+
+        @magicgui(call_button="get_WIDTH", mean_width={"disabled": True, "fixedWidth": 50})
+        def meanfunc(mean_width=""):
+            if (viewer.layers[-1].name == "Shapes") & (viewer.layers[-1].selected) :
+                data = viewer.layers[-1].data
+                c = 0
+                for d in data:
+                    c += (sum((d[1,:] - d[0,:])**2))**0.5
+                return(str(round(c/len(data))))
+            else : return ""
+
+        gui3 = meanfunc.Gui(show=True)
+        viewer.window.add_dock_widget(gui3)
+        gui3.called.connect(lambda result: gui3.set_widget("mean_width", result))
 
         @magicgui(filename={"mode": "existing_directory"})
         def filepicker(filename=Path("~")):
             #print("The filename is:", filename)
             #im = tifffile.imread(filename)
             return filename
-
         # instantiate the widget
         with event_loop():
-            gui1 = make_labels.Gui(show = True)
-            viewer.window.add_dock_widget(gui1, area="right")
-            gui1.threshold_changed.connect(changelabels)
-
             gui2 = filepicker.Gui(show=True)
             viewer.window.add_dock_widget(gui2, area="right")
             gui2.filename_changed.connect(defaultpath)
 
         viewer.grid_view()
+
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()
