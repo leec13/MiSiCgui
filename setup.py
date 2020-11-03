@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MiSiCgui", # Replace with your own username
-    version="0.3.4",
+    version="0.3.5",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://imm.cnrs.fr",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    #packages=[''],
+    package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]
     install_requires=[
    'PyQt5',
    'napari',
