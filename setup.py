@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MiSiCgui", # Replace with your own username
-    version="0.3.2",
+    version="0.3.3",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
@@ -24,7 +24,7 @@ setuptools.setup(
     ],
     dependency_links=['MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'],
     entry_points = {
-        'console_scripts': ['MISIC=MiSiCapp.MiSiCgui_main:main'],
+        'console_scripts': ['MISIC=MiSiCgui.MiSiCgui_main:main'],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
