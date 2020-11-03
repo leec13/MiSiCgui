@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://imm.cnrs.fr",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]
+    package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]},
     install_requires=[
    'PyQt5',
    'napari',
