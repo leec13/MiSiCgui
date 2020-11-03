@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MiSiCgui", # Replace with your own username
-    version="0.3.1",
+    version="0.3.2",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://imm.cnrs.fr",
     packages=setuptools.find_packages(),
+    include_package_data=True,
     #packages=[''],
     install_requires=[
    'PyQt5',
