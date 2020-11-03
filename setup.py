@@ -14,14 +14,15 @@ setuptools.setup(
     url="https://imm.cnrs.fr",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]},
     install_requires=[
-   'PyQt5',
-   'napari',
-   'magicgui',
-   'tiffile',
-   'MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'
+        'PyQt5',
+        'napari',
+        'magicgui',
+        'tiffile',
+        'MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'
     ],
+    package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]},
+    data_files=[('images', ['images/screen1.png'])],
     dependency_links=['MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'],
     entry_points = {
         'console_scripts': ['MISIC=MiSiCgui.MiSiCgui_main:main'],
