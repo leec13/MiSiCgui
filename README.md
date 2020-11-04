@@ -23,6 +23,12 @@ MISIC
 MISIC
 
 ### How to use it
+The Napari site explain how to use the interface, please see :
+
+https://napari.org/tutorials/
+
+Specific commands for MISICgui
+
 Drag and drop one images
 
 Select a default directory
@@ -30,6 +36,8 @@ Select a default directory
 click "get_mask" button
 
 To process all slides of one stack slect "process all"
+
+The screenshots bellow explain each step :
 
 !['screen1.png'](https://github.com/leec13/MiSiCgui/blob/master/images/screen1.png?raw=true)
 
