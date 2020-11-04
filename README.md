@@ -41,4 +41,10 @@ The screenshots bellow explain each step :
 
 !['screen1.png'](https://github.com/leec13/MiSiCgui/blob/master/images/screen1.png?raw=true)
 
+!['screen2.png'](https://github.com/leec13/MiSiCgui/blob/master/images/screen2.png?raw=true)
+
+!['screen3.png'](https://github.com/leec13/MiSiCgui/blob/master/images/screen3.png?raw=true)
+
+
+
 
