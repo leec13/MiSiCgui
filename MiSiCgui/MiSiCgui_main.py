@@ -11,18 +11,21 @@ from skimage.measure import label
 import tiffile as tiffile
 import numpy as np
 
+
 import napari
 from napari.layers import Image
 from magicgui import magicgui
 from magicgui._qt.widgets import QDoubleSlider
 from magicgui import event_loop, magicgui
-from PyQt5.QtWidgets import QDoubleSpinBox, QSlider
-from PyQt5.QtCore import Qt
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 from MiSiC.MiSiC import *
+import MiSiCgui
 
-gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "ginvert" : None, "gpos" : None, "gsave_all" : None}
-#thresh = 220
+gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 
 misic = MiSiC()
 viewer = None
@@ -90,8 +93,6 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
     print("Finish")
     return((255.0*rtim).astype(np.uint8))
 
-
-
 def main():
     with napari.gui_qt():
         global viewer
@@ -113,6 +114,8 @@ def main():
         
         def changelabels(thresh):
             #& ("seg" not in laynames)
+            gui1.value = thresh
+            print(thresh)
             laynames = [ l.name for l in viewer.layers]
             if ('seg' in laynames):
                 i = laynames.index("seg")
@@ -122,6 +125,7 @@ def main():
                 im = viewer.layers['image_mask result'].data > (thresh)
                 label_image = label(im)
                 viewer.add_labels(label_image, name="seg")
+                gdict["gthresh"] = thresh
 
 
 
@@ -176,12 +180,43 @@ def main():
 
         @magicgui(
             auto_call=True,
-            threshold = {'widget_type': QSlider, 'minimum': 1, 'maximum': 255, 'orientation':Qt.Horizontal, "fixedWidth": 800})
-        def make_labels(threshold = 220):
+            threshold={'widget_type': QSlider, 'minimum': 1, 'maximum': 255, 'orientation':Qt.Horizontal, "fixedWidth": 600},
+            value = {"fixedWidth": 50}
+        )
+        def make_labels(threshold = 220, value = "220"):
             return threshold
         gui1 = make_labels.Gui(show = True)
         viewer.window.add_dock_widget(gui1)
+        #viewer.window.add_dock_widget(label={'widget_type': QLabel, 'text':"label"})
         gui1.threshold_changed.connect(changelabels)
+
+        @magicgui(call_button="save_labels")
+        def funcsave_labels():
+            imsave(str(gdict["gfilename"])+"_thresh_"+str(gdict["gthresh"])+"_labels.tif",(-4294967295.0*viewer.layers["seg"].data).astype(np.uint32))
+            return None
+        gui4 = funcsave_labels.Gui(show=True)
+        viewer.window.add_dock_widget(gui4)
+
+        @magicgui(call_button="HELP")
+        def funcHELP():
+            #print("debut")
+            msg = QMessageBox()
+            msg.setWindowTitle("Help1")
+            msg.setText("read Napari : https://napari.org/tutorials/\n"+
+            "read the doc : https://github.com/leec13/MiSiCgui\n"+
+            "0 - drag and drop the image\n"
+            "1 - select default directory\n"+
+            "2 - Add a shape layer\n"+
+            "3 - trace some widths\n"+
+            "4 - get the mean width (button)\n"+
+            "5 - set the mean width (field)\n"+
+            "6 - get the mask\n"+
+            "7 - to create segmentation mouve threshold cursor (only 2D and Time Lapse)")
+            msg.exec_()
+           
+            return None
+        gui5 = funcHELP.Gui(show=True)
+        viewer.window.add_dock_widget(gui5)
 
         @magicgui(call_button="get_WIDTH", mean_width={"disabled": True, "fixedWidth": 50})
         def meanfunc(mean_width=""):
@@ -194,20 +229,18 @@ def main():
             else : return ""
 
         gui3 = meanfunc.Gui(show=True)
-        viewer.window.add_dock_widget(gui3)
+        viewer.window.add_dock_widget(gui3, area="right")
         gui3.called.connect(lambda result: gui3.set_widget("mean_width", result))
 
         @magicgui(filename={"mode": "existing_directory"})
         def filepicker(filename=Path("~")):
-            #print("The filename is:", filename)
-            #im = tifffile.imread(filename)
             return filename
         # instantiate the widget
         with event_loop():
             gui2 = filepicker.Gui(show=True)
             viewer.window.add_dock_widget(gui2, area="right")
             gui2.filename_changed.connect(defaultpath)
-
+            
         viewer.grid_view()
 
 if __name__ == "__main__":
