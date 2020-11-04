@@ -31,6 +31,6 @@ click "get_mask" button
 
 To process all slides of one stack slect "process all"
 
-![](https://github.com/leec13/MiSiCgui/blob/master/images/screen1.png?raw=true)
+![''](https://github.com/leec13/MiSiCgui/blob/master/images/screen1.png?raw=true)
 
 
