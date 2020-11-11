@@ -10,13 +10,13 @@ Requires version python version 3.7 install via [pip]:
 
 we recommand to create a specific envronement with conda/miniconda, exemple:
 
-`conda create --name MiSiCgui git python=3.7
+`conda create --name MiSiCgui git python=3.7`
 
-conda activate MiSiCapp
+`conda activate MiSiCapp`
 
-pip install git+https://github.com/leec13/MiSiCgui.git
+`pip install git+https://github.com/leec13/MiSiCgui.git`
 
-MISIC`
+`MISIC`
 
 ## Usage
 
@@ -30,7 +30,7 @@ $ MISIC
 ### How to use it
 The Napari site explain how to use the interface, please see :
 
-https://napari.org/tutorials/
+("https://napari.org/tutorials/")
 
 Specific commands for MISICgui (respect the order)
 
