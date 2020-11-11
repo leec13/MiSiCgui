@@ -20,20 +20,28 @@ MISIC
 ## Usage
 
 ### command line
-MISIC
+type MISIC in the terminal:
+
+```bash
+$ MISIC
+```
 
 ### How to use it
 The Napari site explain how to use the interface, please see :
 
 https://napari.org/tutorials/
 
-Specific commands for MISICgui
+Specific commands for MISICgui (respect the order)
 
-Drag and drop one images
+1 - Drag and drop one images
 
-Select a default directory
+2 - Select a default directory
 
-click "get_mask" button
+Measure roughtly the mean width of cell (steps 2, 3, 4 in the screenshot bellow)
+
+5 - Set the mean width with the upper right button
+
+6 - click "get_mask" button
 
 To process all slides of one stack slect "process all"
 
