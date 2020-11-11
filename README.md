@@ -12,7 +12,7 @@ we recommand to create a specific envronement with conda/miniconda, exemple:
 
 `conda create --name MiSiCgui git python=3.7`
 
-`conda activate MiSiCapp`
+`conda activate MiSiCgui`
 
 `pip install git+https://github.com/leec13/MiSiCgui.git`
 
