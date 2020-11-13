@@ -18,7 +18,10 @@ we recommand to create a specific envronement with conda/miniconda, exemple:
 
 ## Troubleshooting
 
-Mac : Sometimes needs to install Xcode.
+Mac : 
+
+Sometimes needs to install Xcode.
+
 Linux : 
 
 `conda install gcc_linux-64`
