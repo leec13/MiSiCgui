@@ -6,8 +6,6 @@ Based on MiSiC created by S. Panigrahi ("https://github.com/pswapnesh/MiSiC")
 ## Installation
 Requires version python version 3.7 install via [pip]:
 
-`pip install git+https://github.com/leec13/MiSiCgui.git`
-
 we recommand to create a specific envronement with conda/miniconda, exemple:
 
 `conda create --name MiSiCgui git python=3.7`
@@ -17,6 +15,15 @@ we recommand to create a specific envronement with conda/miniconda, exemple:
 `pip install git+https://github.com/leec13/MiSiCgui.git`
 
 `MISIC`
+
+## Troubleshooting
+
+Mac : Sometimes needs to install Xcode.
+Linux : 
+
+`conda install gcc_linux-64`
+
+`sudo apt-get install --reinstall libxcb-xinerama0`
 
 ## Usage
 
