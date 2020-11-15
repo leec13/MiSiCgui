@@ -23,6 +23,7 @@ Mac :
 Sometimes needs to install Xcode.
 
 It could maybe be replaced by :
+
 `conda install clang_osx-64``
 
 (not tested yet)
