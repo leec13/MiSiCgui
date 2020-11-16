@@ -1,7 +1,9 @@
 # MiSiCgui
 A GUI for MiSiC tool
 
-Based on MiSiC created by S. Panigrahi ("https://github.com/pswapnesh/MiSiC")
+Based on MiSiC ("https://github.com/pswapnesh/MiSiC")
+
+Please cite: ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 
 ## Installation
 Requires version python version 3.7 install via [pip]:
