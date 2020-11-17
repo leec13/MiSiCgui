@@ -24,9 +24,11 @@ Mac :
 
 Sometimes needs to install Xcode.
 
-It could maybe be replaced by :
+or at least the gcc compiler :
 
 `conda install clang_osx-64`
+
+`conda install -c anaconda psutil`
 
 (not tested yet)
 
