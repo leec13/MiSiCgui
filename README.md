@@ -20,7 +20,17 @@ we recommand to create a specific envronement with conda/miniconda, exemple:
 
 ## Troubleshooting
 
+Windows :
+
+Sometimes needs to re-install numpy
+
+`conda activate MiSiCgui`
+
+`conda install numpy`
+
 Mac : 
+
+PyQt5 needs mac os > 10.13 (or manage to install pyqt5 exemple : https://gist.github.com/guillaumevincent/10983814)
 
 Sometimes needs to install Xcode.
 
@@ -46,6 +56,7 @@ Some linux systems need :
 type MISIC in the terminal:
 
 ```bash
+$ conda activate MiSiCgui
 $ MISIC
 ```
 
