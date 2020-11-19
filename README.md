@@ -36,6 +36,8 @@ Sometimes needs to install Xcode.
 
 or at least the gcc compiler :
 
+`conda activate MiSiCgui`
+
 `conda install clang_osx-64`
 
 `conda install -c anaconda psutil`
@@ -45,6 +47,8 @@ or at least the gcc compiler :
 Linux :
 
 Some linux systems need :
+
+`conda activate MiSiCgui`
 
 `conda install gcc_linux-64`
 
