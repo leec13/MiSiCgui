@@ -69,6 +69,8 @@ The Napari site explain how to use the interface, please see :
 
 ("https://napari.org/tutorials/")
 
+The images folder contains some images exemples and the resulting masks with the parameters used in the file name.
+
 Specific commands for MISICgui (respect the order)
 
 1 - Drag and drop one images
