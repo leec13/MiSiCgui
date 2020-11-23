@@ -8,7 +8,9 @@ Please cite: ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 ## Installation
 Requires version python version 3.7 install via [pip]:
 
-we recommand to create a specific envronement with conda/miniconda, exemple:
+we strong recommand to create a specific envronement with conda/miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+After conda installation oen a terminal and :
 
 `conda create --name MiSiCgui git python=3.7`
 
