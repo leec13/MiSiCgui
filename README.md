@@ -10,7 +10,7 @@ Requires version python version 3.7 install via [pip]:
 
 we strong recommand to create a specific envronement with conda/miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
 
-After conda installation oen a terminal and :
+After conda installation open a terminal and :
 
 `conda create --name MiSiCgui git python=3.7`
 
