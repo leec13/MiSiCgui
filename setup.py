@@ -19,7 +19,7 @@ setuptools.setup(
     include_package_data=True,
     install_requires=[
         'PyQt5',
-        'napari',
+        'napari==0.4.0',
         'magicgui',
         'tiffile',
         'MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'
