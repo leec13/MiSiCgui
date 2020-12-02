@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://imm.cnrs.fr",
     #packages=setuptools.find_packages(),
-    packages=['MiSiCgui'],
+    packages=['MiSiCgui', 'MiSiC'],
     package_dir={'MiSiCgui': 'MiSiCgui'},
     include_package_data=True,
     install_requires=[
