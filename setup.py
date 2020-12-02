@@ -13,8 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://imm.cnrs.fr",
     #packages=setuptools.find_packages(),
-    packages=['MiSiCgui', 'MiSiC'],
+    packages=['MiSiCgui'],
     package_dir={'MiSiCgui': 'MiSiCgui'},
+    py_modules = ['utils'],
     include_package_data=True,
     install_requires=[
         'PyQt5',
