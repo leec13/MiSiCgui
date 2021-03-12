@@ -1,11 +1,88 @@
-# MiSiCgui
+MiSiC & MiSiCgui Handbook
+=========================
+
+# 1 - Introduction
+
+!['handbook_workflow.png'](./images/handbook_workflow.png)
+
+MiSiC is a tool that allows to generate a segementation mask from microscopic images of bacteria cells. It accept a wide range of bacterias morphology and microscope modalities as phase contrast, brightfield and fluorescence. MiSiC is not a quantification tool measuring the cellular features like area, length, position, etc.
+
+Details are decribe in : ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
+
+## a) Recommended images: size, resolution and cells density
+
+MiSiC is based in a pre-trained convolutional network. It works for images obtained at high magnification and resolution (> 60x and N.A > 1.25) common CMOS cameras with a photosite size of around 6 µm it coresponds to 60 - 100 nm / image pixel. The model was trained with synthetic data with a width of 10 image pixels. This value is in the range of bacteria cells size (≈ 1 µm). The size parameter adjust the size of the source image to be close to the training conditions (see bellow).
+
+## b) Phase Contrast, Brightfield, Fluorescence
+## c) Pre and post processing
+## d) Parameters : size and noise
+
+# 2 - MiSiC
+## a) Installation
+Requires version python version 3.6
+
+`pip install git+https://github.com/pswapnesh/MiSIC.git`
+
+or 
+
+`pip install https://github.com/pswapnesh/MiSiC/archive/master.zip`
+
+
+
+## b) Usage
+### command line
+`mbnet --light_background True --mean_width 8 --src '/path/to/source/folder/\*.tif' --dst '/path/to/destination/folder/'`
+
+`mbnet -lb True -mw 8 -s /path/to/source/folder/*.tif -d /path/to/destination/folder/`
+
+### use package
+```python
+from MiSiC.MiSiC import *
+from skimage.io import imsave,imread
+
+filename = 'awesome_image.tif'
+
+# read image using your favorite package
+im = imread(filename)
+
+# Parameters that need to be changed
+## Ideally, use a single image to fine tune two parameters : mean_width and noise_variance (optional)
+
+#input the approximate mean width of microbe under consideration
+mean_width = 8
+noise_variance = 0.0001
+
+# compute scaling factor
+scale = (10/mean_width)
+
+# Initialize MiSiC
+misic = MiSiC()
+
+# preprocess using inbuit function or if you are feeling lucky use your own preprocessing
+im = pre_processing(im,scale = scale, noise_var = noise_variance)
+
+# segment the image with invert = True for light backgraound images like Phase contrast
+y = misic.segment(im,invert = True)
+
+# if you need both the body y[:,:,0] and contour y[:,:,1] skip the post processing.
+y = post_processing(y,im.shape)
+
+# save 8-bit segmented image and use it as you like
+imsave('segmented.tif', (y*255).astype(np.uint8))
+
+```
+
+# 3 - MiSiCgui
+
+
 A GUI for MiSiC tool
 
 Based on MiSiC ("https://github.com/pswapnesh/MiSiC")
 
 Please cite: ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 
-## Installation
+
+## a) Installation
 Requires version python version 3.7 install via [pip]:
 
 we strong recommand to create a specific envronement with conda/miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
@@ -20,7 +97,7 @@ After conda installation open a terminal and :
 
 `MISIC`
 
-## Troubleshooting
+## b) Troubleshooting
 
 Windows :
 
@@ -56,9 +133,11 @@ Some linux systems need :
 
 `sudo apt-get install --reinstall libxcb-xinerama0`
 
-## Usage
+Know bugs : error while quit the application
 
-### command line
+## c) Usage
+
+### Start the GUI app
 type MISIC in the terminal:
 
 ```bash
@@ -66,6 +145,7 @@ $ conda activate MiSiCgui
 $ MISIC
 ```
 
+## d) 
 ### How to use it
 The Napari site explain how to use the interface, please see :
 
@@ -94,5 +174,6 @@ The screenshots bellow explain each step :
 !['screen2.png'](/images/screen2.png)
 
 !['screen3.png'](./images/screen3.png)
+
 
 
