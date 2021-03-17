@@ -1,20 +1,34 @@
 MiSiC & MiSiCgui Handbook
 =========================
 
-# 1 - Introduction
+# 1 - Introduction 
 
 !['handbook_workflow.png'](./images/handbook_workflow.png)
 
-MiSiC is a tool that allows to generate a segementation mask from microscopic images of bacteria cells. It accept a wide range of bacterias morphology and microscope modalities as phase contrast, brightfield and fluorescence. MiSiC is not a quantification tool measuring the cellular features like area, length, position, etc.
+MiSiC is a tool that allows to generate a segementation mask from microscopic images of bacteria cells. MiSiC solves the problem of images with a dense population of cells that are not correctly obtained by intensity threshold. Other tools based on supervised learning exists (supersegger, DeepCell, Ilastik, etc.). MiSiC accepts a wide range of bacterial morphologies and microscope modalities such as phase contrast, brightfield and fluorescence. MiSiC is not a quantification tool dedicated to measure the cellular features like area, length, position, etc (some convinient tools for this are MicrobeJ and Oufti). A grphical user interfafe is available 'MiSiCgui" (see bellow point 3). The main advantages of MiSiC are :
+
+- wide purpose pre trained model
+
+- only two parameters to set
 
 Details are decribe in : ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 
 ## a) Recommended images: size, resolution and cells density
 
-MiSiC is based in a pre-trained convolutional network. It works for images obtained at high magnification and resolution (> 60x and N.A > 1.25) common CMOS cameras with a photosite size of around 6 µm it coresponds to 60 - 100 nm / image pixel. The model was trained with synthetic data with a width of 10 image pixels. This value is in the range of bacteria cells size (≈ 1 µm). The size parameter adjust the size of the source image to be close to the training conditions (see bellow).
+MiSiC is based in a pre-trained convolutional network (CNN). It works for images obtained at high magnification and resolution (> 60x and N.A > 1.25), common CMOS cameras with a photosite size of around 6 µm yield a 60-100nm/pixel resolution. The CNN model was trained with synthetic data with a width of 10 image pixels. This value is in the range of bacteria cells size (≈ 1 µm). The size parameter adjust the size of the source image to be close to the training conditions (see bellow).
 
 ## b) Phase Contrast, Brightfield, Fluorescence
+
+These modalities are mostly used in for photonic microscopy. The MiSiC model was trained with a representaion of the image ("Shape Index") independent from the microscope modality, allowing to predict the binary masks from any of these tree kinds of images. MiSiC need to set if there are bright objects in a dark background (Brightfield and fluorescnce) or dark objects in a light background (phase contrast)
+
 ## c) Pre and post processing
+
+### Phase Contrast, brightfield :
+
+Usually any pre processing step is required. If the imege 
+
+
+
 ## d) Parameters : size and noise
 
 # 2 - MiSiC
