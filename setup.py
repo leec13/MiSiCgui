@@ -22,7 +22,6 @@ setuptools.setup(
         'napari',
         'magicgui',
         'tiffile',
-        'numpy'
         'MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'
     ],
     package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]},
