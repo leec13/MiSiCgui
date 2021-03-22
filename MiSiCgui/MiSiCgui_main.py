@@ -15,7 +15,7 @@ import numpy as np
 import napari
 from napari.layers import Image
 from magicgui import magicgui
-from magicgui._qt.widgets import QDoubleSlider
+#from magicgui._qt.widgets import QDoubleSlider
 from magicgui import event_loop, magicgui
 
 from PyQt5.QtCore import *
@@ -23,7 +23,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 from MiSiC.MiSiC import *
-import MiSiCgui
+#import MiSiCgui
 
 gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 
@@ -63,8 +63,6 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
             #print("Finish")
             savestr = "all"
     
-    
-
     else :
         print("running...")
         hyperS = np.zeros(im.shape)
@@ -91,7 +89,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
 
     imsave(str(gdict["gfilename"])+"_W="+width+"_N="+str(noise)+"_DIM="+gshape+"_frame="+savestr+"_mask.tif",(255.0*hyperS).astype(np.uint8))
     print("Finish")
-    return((255.0*rtim).astype(np.uint8))
+    return((rtim*255.0))
 
 def main():
     with napari.gui_qt():
@@ -100,7 +98,7 @@ def main():
 
         def updatelayer(layer):
             viewer.layers[-1].metadata=gdict
-            gui.refresh_choices("layer")
+            updatelayer.reset_choices("layer")
             viewer.layers[-1].metadata=gdict
             print("event", layer)
 
@@ -112,10 +110,10 @@ def main():
             gdict["gfilename"] = os.path.join(apath, viewer.layers[0].name)
             #print("apres",gdict["gfilename"])
         
-        def changelabels(thresh):
+        def changelabels(event_thr):
             #& ("seg" not in laynames)
-            gui1.value = thresh
-            print(thresh)
+            print(make_labels.threshold.value)
+            thresh = make_labels.threshold.value
             laynames = [ l.name for l in viewer.layers]
             if ('seg' in laynames):
                 i = laynames.index("seg")
@@ -129,8 +127,8 @@ def main():
 
 
 
-        @magicgui(call_button="get_mask", noise={"fixedWidth": 50}, layout="vertical")
-        def image_mask(layer: Image, mean_width = 6, noise = "0.00", PhaseContrast = True, process_all = False) -> Image:
+        @magicgui(call_button="get_mask", layout="vertical")
+        def image_mask(layer: Image, mean_width = 6, noise = "0.00", PhaseContrast = True, process_all = False) -> 'napari.types.ImageData':
             global gdict
             p = tuple([int(round(x)) for x in viewer.dims.point])
             #print("pressed", viewer.layers)
@@ -164,14 +162,17 @@ def main():
                 gdict["gsave_all"] = process_all
 
                 updatemeta(gdict, 0)
+
                 return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
         
 
-        viewer.grid_view()
+        #viewer.grid_view()
         # instantiate the widget
-        gui = image_mask.Gui()
+        #gui = image_mask.Gui()
+        #image_mask.show(run = True)
         # add our new widget to the napari viewer
-        viewer.window.add_dock_widget(gui, area="right")
+        #viewer.window.add_dock_widget(gui, area="right")
+        viewer.window.add_dock_widget(image_mask, area="right")
         
         # keep the dropdown menus in the gui in sync with the layer model
         #viewer.layers.events.changed.connect(lambda x: gui.refresh_choices("layer"))
@@ -180,22 +181,29 @@ def main():
 
         @magicgui(
             auto_call=True,
-            threshold={'widget_type': QSlider, 'minimum': 1, 'maximum': 255, 'orientation':Qt.Horizontal, "fixedWidth": 600},
-            value = {"fixedWidth": 50}
+            threshold={"widget_type": "IntSlider", 'min': 1, 'max': 255, 'orientation':"horizontal"},
+            #value = {"fixedWidth": 50}
         )
         def make_labels(threshold = 220, value = "220"):
             return threshold
-        gui1 = make_labels.Gui(show = True)
-        viewer.window.add_dock_widget(gui1)
+        #gui1 = make_labels.Gui(show = True)
+        #viewer.window.add_dock_widget(gui1)
+        #make_labels.show(run = True)
+        viewer.window.add_dock_widget(make_labels)
         #viewer.window.add_dock_widget(label={'widget_type': QLabel, 'text':"label"})
-        gui1.threshold_changed.connect(changelabels)
+        #gui1.threshold_changed.connect(changelabels)
+        make_labels.threshold.changed.connect(changelabels)
+        
+
 
         @magicgui(call_button="save_labels")
         def funcsave_labels():
             imsave(str(gdict["gfilename"])+"_thresh_"+str(gdict["gthresh"])+"_labels.tif",(-4294967295.0*viewer.layers["seg"].data).astype(np.uint32))
             return None
-        gui4 = funcsave_labels.Gui(show=True)
-        viewer.window.add_dock_widget(gui4)
+        #gui4 = funcsave_labels.Gui(show=True)
+        #viewer.window.add_dock_widget(gui4)
+        #funcsave_labels.show(run = True)
+        viewer.window.add_dock_widget(funcsave_labels)
 
         @magicgui(call_button="HELP")
         def funcHELP():
@@ -215,11 +223,13 @@ def main():
             msg.exec_()
            
             return None
-        gui5 = funcHELP.Gui(show=True)
-        viewer.window.add_dock_widget(gui5)
+        #gui5 = funcHELP.Gui(show=True)
+        #viewer.window.add_dock_widget(gui5)
+        #funcHELP.show(run=True)
+        viewer.window.add_dock_widget(funcHELP)
 
-        @magicgui(call_button="get_WIDTH", mean_width={"disabled": True, "fixedWidth": 50})
-        def meanfunc(mean_width=""):
+        @magicgui(call_button="get_WIDTH", result_widget=False)
+        def meanfunc(mean_width = ""):
             if (viewer.layers[-1].name == "Shapes") & (viewer.layers[-1].selected) :
                 data = viewer.layers[-1].data
                 c = 0
@@ -228,20 +238,31 @@ def main():
                 return(str(round(c/len(data))))
             else : return ""
 
-        gui3 = meanfunc.Gui(show=True)
-        viewer.window.add_dock_widget(gui3, area="right")
-        gui3.called.connect(lambda result: gui3.set_widget("mean_width", result))
+        #gui3 = meanfunc.Gui(show=True)
+        #viewer.window.add_dock_widget(gui3, area="right")
+        #meanfunc.show(run = True)
+        viewer.window.add_dock_widget(meanfunc, area="right")
 
-        @magicgui(filename={"mode": "existing_directory"})
+        #gui3.called.connect(lambda result: gui3.set_widget("mean_width", result))
+        #meanfunc.called.connect(lambda result: gui3.set_widget("mean_width", result))
+
+        @magicgui(filename={"mode": "d"})
         def filepicker(filename=Path("~")):
+            """doc string test"""
             return filename
         # instantiate the widget
-        with event_loop():
-            gui2 = filepicker.Gui(show=True)
-            viewer.window.add_dock_widget(gui2, area="right")
-            gui2.filename_changed.connect(defaultpath)
+        #filepicker.show(run = True)
+        #viewer.window.add_function_widget(filepicker)
+        viewer.window.add_dock_widget(filepicker, area="right")
+        filepicker.filename.changed.connect(defaultpath)
+
+        # magicgui v 2.0
+        #with event_loop():
+        #    gui2 = filepicker.Gui(show=True)
+        #    viewer.window.add_dock_widget(gui2, area="right")
+        #    gui2.filename_changed.connect(defaultpath)
             
-        viewer.grid_view()
+        #viewer.grid_view()
 
 if __name__ == "__main__":
     # execute only if run as a script
