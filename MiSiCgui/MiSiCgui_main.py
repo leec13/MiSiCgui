@@ -102,8 +102,9 @@ def main():
             viewer.layers[-1].metadata=gdict
             print("event", layer)
 
-        def defaultpath(apath):
-            global gdict    
+        def defaultpath(event_apath):
+            global gdict
+            apath = filepicker.filename.value
             #viewer.add_image(tifffile.imread(apath))
             #print("avant",os.path.join(apath, viewer.layers[0].name))
             gdict["gDir"] = apath
