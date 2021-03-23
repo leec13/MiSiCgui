@@ -9,7 +9,7 @@ MiSiC is a tool that allows to generate a segementation mask from microscopic im
 
 - wide purpose pre trained model
 
-- only two parameters to set
+- only two parameters to set 
 
 Details are decribe in : ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 
