@@ -27,11 +27,15 @@ Usually any pre processing step is required. However some low quality images or 
 
 !['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
 
-In this example the pre processing of the fluorescence images improuves de quality of the prediction (gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
-
-
+In this example the pre processing of the fluorescence images improuves de quality of the prediction (100X NA 1.43 microsocpe objective, 0.06 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
 
 ## d) Parameters : size and noise
+
+In the training data set for MiSiC the objects had a mean width of 10 pixels. So a scale factor called "size" has been provide to adjust the mean size of the source data to a value close to 10 pixels.
+
+The noise parameter has been provide in order to prevent some false positive artifacts in the Phase Contrast images with high contrast and high quality. This is due to the "halo efect" of Phase Contrast technique (see below):
+
+
 
 # 2 - MiSiC
 ## a) Installation
