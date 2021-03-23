@@ -109,24 +109,28 @@ def main():
             #print("avant",os.path.join(apath, viewer.layers[0].name))
             gdict["gDir"] = apath
             if len(viewer.layers) > 0 :
-
-            gdict["gfilename"] = os.path.join(apath, viewer.layers[0].name)
+                gdict["gfilename"] = os.path.join(apath, viewer.active_layer.name)
             #print("apres",gdict["gfilename"])
         
         def changelabels(event_thr):
             #& ("seg" not in laynames)
             print(make_labels.threshold.value)
             thresh = make_labels.threshold.value
-            laynames = [ l.name for l in viewer.layers]
-            if ('seg' in laynames):
-                i = laynames.index("seg")
-                viewer.layers.pop(i)
+            laynames = [ l.name for l in viewer.layers]            
 
-            if ('image_mask result' in laynames)  :
-                im = viewer.layers['image_mask result'].data > (thresh)
-                label_image = label(im)
-                viewer.add_labels(label_image, name="seg")
-                gdict["gthresh"] = thresh
+            #if ('image_mask result' in laynames)  :
+                #im = viewer.layers['image_mask result'].data > (thresh)
+            im = viewer.layers[viewer.active_layer.name].data > (thresh)
+            label_image = label(im)
+                #viewer.add_labels(label_image, name="seg")
+            gdict["gthresh"] = thresh
+            
+            if ('seg' in laynames):
+                viewer.layers['seg'].data = label_image
+                #i = laynames.index("seg")
+                #viewer.layers.pop(i)
+            else : viewer.add_labels(label_image, name="seg")
+            
 
 
 
