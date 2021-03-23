@@ -25,6 +25,7 @@ from PyQt5.QtWidgets import *
 from MiSiC.MiSiC import *
 #import MiSiCgui
 
+global
 gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 
 misic = MiSiC()
@@ -102,11 +103,13 @@ def main():
             viewer.layers[-1].metadata=gdict
             print("event", layer)
 
-        def defaultpath(apath):
-            global gdict    
+        def defaultpath(event_apath):
+            apath = filepicker.filename.value
             #viewer.add_image(tifffile.imread(apath))
             #print("avant",os.path.join(apath, viewer.layers[0].name))
             gdict["gDir"] = apath
+            if len(viewer.layers) > 0 :
+
             gdict["gfilename"] = os.path.join(apath, viewer.layers[0].name)
             #print("apres",gdict["gfilename"])
         
@@ -129,8 +132,9 @@ def main():
 
         @magicgui(call_button="get_mask", layout="vertical")
         def image_mask(layer: Image, mean_width = 6, noise = "0.00", PhaseContrast = True, process_all = False) -> 'napari.types.ImageData':
-            global gdict
             p = tuple([int(round(x)) for x in viewer.dims.point])
+            laynames = [ l.name for l in viewer.layers]
+            idx = laynames.index(viewer.active_layer.name)
             #print("pressed", viewer.layers)
             if process_all & (layer.data.ndim > 2) :
                 if layer.data.ndim == 5 : img = layer.data[:, p[1], p[2],:,:]
@@ -145,7 +149,7 @@ def main():
                 gdict["gpos"] = p
                 gdict["gsave_all"] = process_all
 
-                updatemeta(gdict, 0)
+                updatemeta(gdict, idx)
                 return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
 
             else:
@@ -161,7 +165,7 @@ def main():
                 gdict["gpos"] = p
                 gdict["gsave_all"] = process_all
 
-                updatemeta(gdict, 0)
+                updatemeta(gdict, idx)
 
                 return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
         
