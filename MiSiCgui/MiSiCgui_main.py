@@ -114,7 +114,9 @@ def main():
 
             print(make_labels.threshold.value)
             thresh = make_labels.threshold.value
-            laynames = [ l.name for l in viewer.layers]            
+            laynames = [ l.name for l in viewer.layers]
+            selects = [l.selected for l in viewer.layers]
+            idx = selects.index(True)
 
             #if ('image_mask result' in laynames)  :
                 #im = viewer.layers['image_mask result'].data > (thresh)
@@ -128,6 +130,8 @@ def main():
                 #i = laynames.index("seg")
                 #viewer.layers.pop(i)
             else : viewer.add_labels(label_image, name="seg")
+            viewer.layers['seg'].selected = False
+            viewer.layers[idx].selected = True
 
 
         @magicgui(call_button="get_mask", layout="vertical")
