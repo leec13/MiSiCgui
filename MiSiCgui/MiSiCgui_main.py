@@ -106,15 +106,12 @@ def main():
 
         def defaultpath(event_apath):
             apath = filepicker.filename.value
-            #viewer.add_image(tifffile.imread(apath))
-            #print("avant",os.path.join(apath, viewer.layers[0].name))
             gdict["gDir"] = apath
             if len(viewer.layers) > 0 :
                 gdict["gfilename"] = os.path.join(apath, viewer.active_layer.name)
-            #print("apres",gdict["gfilename"])
         
         def changelabels(event_thr):
-            #& ("seg" not in laynames)
+
             print(make_labels.threshold.value)
             thresh = make_labels.threshold.value
             laynames = [ l.name for l in viewer.layers]            
@@ -174,17 +171,7 @@ def main():
 
                 return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
         
-
-        #viewer.grid_view()
-        # instantiate the widget
-        #gui = image_mask.Gui()
-        #image_mask.show(run = True)
-        # add our new widget to the napari viewer
-        #viewer.window.add_dock_widget(gui, area="right")
         viewer.window.add_dock_widget(image_mask, area="right")
-        
-        # keep the dropdown menus in the gui in sync with the layer model
-        #viewer.layers.events.changed.connect(lambda x: gui.refresh_choices("layer"))
         viewer.layers.events.changed.connect(updatelayer)
 
 
@@ -195,12 +182,8 @@ def main():
         )
         def make_labels(threshold = 220, value = "220"):
             return threshold
-        #gui1 = make_labels.Gui(show = True)
-        #viewer.window.add_dock_widget(gui1)
-        #make_labels.show(run = True)
+
         viewer.window.add_dock_widget(make_labels)
-        #viewer.window.add_dock_widget(label={'widget_type': QLabel, 'text':"label"})
-        #gui1.threshold_changed.connect(changelabels)
         make_labels.threshold.changed.connect(changelabels)
         
 
@@ -209,9 +192,7 @@ def main():
         def funcsave_labels():
             imsave(str(gdict["gfilename"])+"_thresh_"+str(gdict["gthresh"])+"_labels.tif",(-4294967295.0*viewer.layers["seg"].data).astype(np.uint32))
             return None
-        #gui4 = funcsave_labels.Gui(show=True)
-        #viewer.window.add_dock_widget(gui4)
-        #funcsave_labels.show(run = True)
+
         viewer.window.add_dock_widget(funcsave_labels)
 
         @magicgui(call_button="HELP")
@@ -232,46 +213,39 @@ def main():
             msg.exec_()
            
             return None
-        #gui5 = funcHELP.Gui(show=True)
-        #viewer.window.add_dock_widget(gui5)
-        #funcHELP.show(run=True)
+        
         viewer.window.add_dock_widget(funcHELP)
 
-        @magicgui(call_button="get_WIDTH", result_widget=False)
-        def meanfunc(mean_width = ""):
+        @magicgui(mean_width = {'bind': ""}, call_button="get_WIDTH", result_widget=True, labels = False)
+        def meanfunc(mean_width):
+            
             if (viewer.layers[-1].name == "Shapes") & (viewer.layers[-1].selected) :
                 data = viewer.layers[-1].data
                 c = 0
                 for d in data:
                     c += (sum((d[1,:] - d[0,:])**2))**0.5
-                return(str(round(c/len(data))))
-            else : return ""
+                    res_mean = (str(round(c/len(data))))
+            
+            else :
+                res_mean = ""
+            
+            return res_mean
 
-        #gui3 = meanfunc.Gui(show=True)
-        #viewer.window.add_dock_widget(gui3, area="right")
-        #meanfunc.show(run = True)
+        
+        # alternative to mean_width = {'bind': ""} ligne suivante
+        # meanfunc.mean_width.bind("")
         viewer.window.add_dock_widget(meanfunc, area="right")
 
-        #gui3.called.connect(lambda result: gui3.set_widget("mean_width", result))
-        #meanfunc.called.connect(lambda result: gui3.set_widget("mean_width", result))
 
         @magicgui(filename={"mode": "d"})
         def filepicker(filename=Path("~")):
             """doc string test"""
             return filename
-        # instantiate the widget
-        #filepicker.show(run = True)
-        #viewer.window.add_function_widget(filepicker)
+       
         viewer.window.add_dock_widget(filepicker, area="right")
         filepicker.filename.changed.connect(defaultpath)
 
-        # magicgui v 2.0
-        #with event_loop():
-        #    gui2 = filepicker.Gui(show=True)
-        #    viewer.window.add_dock_widget(gui2, area="right")
-        #    gui2.filename_changed.connect(defaultpath)
-            
-        #viewer.grid_view()
+
 
 if __name__ == "__main__":
     # execute only if run as a script
