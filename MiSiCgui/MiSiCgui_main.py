@@ -83,7 +83,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
         savestr = str(frame)
     
 
-    gshape = viewer.layers[-1].metadata["gdims"]
+    gshape = gdict["gdims"]
     gshape = "_".join([str(i) for i in gshape])
 
     width = str(gdict["width"])
@@ -131,8 +131,6 @@ def main():
                 #i = laynames.index("seg")
                 #viewer.layers.pop(i)
             else : viewer.add_labels(label_image, name="seg")
-            
-
 
 
         @magicgui(call_button="get_mask", layout="vertical")
