@@ -27,6 +27,9 @@ Usually any pre processing step is required. However some low quality images or 
 
 !['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
 
+In this example the pre processing of the fluorescence images improuves de quality of the prediction (gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
+
+
 
 ## d) Parameters : size and noise
 
