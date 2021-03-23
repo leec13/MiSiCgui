@@ -90,7 +90,10 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
 
     imsave(str(gdict["gfilename"])+"_W="+width+"_N="+str(noise)+"_DIM="+gshape+"_frame="+savestr+"_mask.tif",(255.0*hyperS).astype(np.uint8))
     print("Finish")
+<<<<<<< HEAD
     return((255.0*hyperS).astype(np.uint8))
+=======
+>>>>>>> 1cbfc0d96784bfa85dd409f65a32c5842bdf1e02
 
 def main():
     with napari.gui_qt():
