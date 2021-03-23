@@ -25,7 +25,6 @@ from PyQt5.QtWidgets import *
 from MiSiC.MiSiC import *
 #import MiSiCgui
 
-global
 gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 
 misic = MiSiC()
@@ -36,7 +35,8 @@ def updatemeta(metadict = gdict, idx = 1):
 
 
 def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, threshold=220):
-    
+    global gdict
+
     noise = float(noise)
     rtim = np.zeros(gdict["gdims"])
     p = gdict["gpos"]
@@ -95,6 +95,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
 def main():
     with napari.gui_qt():
         global viewer
+        global gdict
         viewer = napari.Viewer()
 
         def updatelayer(layer):
