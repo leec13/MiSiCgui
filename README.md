@@ -19,7 +19,7 @@ MiSiC is based in a pre-trained convolutional network (CNN). It works for images
 
 ## b) Phase Contrast, Brightfield, Fluorescence
 
-These modalities are mostly used in for photonic microscopy. The MiSiC model was trained with a representaion of the image ("Shape Index") independent from the microscope modality, allowing to predict the binary masks from any of these tree kinds of images. MiSiC need to set if there are bright objects in a dark background (Brightfield and fluorescnce) or dark objects in a light background (phase contrast)
+These modalities are mostly used in for photonic microscopy. The MiSiC model was trained with a representaion of the image ("Shape Index") independent from the microscope modality, allowing to predict the binary masks from any of these tree kinds of images. MiSiC need to set if there are bright objects in a dark background (Brightfield and fluorescence) or dark objects in a light background (phase contrast)
 
 ## c) Pre and post processing
 
