@@ -25,8 +25,7 @@ These modalities are mostly used in for photonic microscopy. The MiSiC model was
 
 Usually any pre processing step is required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expresion) may yield better results with a pre processing modifacation. For Phase Contrast images usually a slight correction of gamme over 1.0 could increase the contrast of light cells. For fluorescence images a gamma correction close to 0.2 and a Gaussian of Laplacian modifcation could increase the detectivity with MiSiC (see below) :
 
-
-
+!['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
 
 
 ## d) Parameters : size and noise
