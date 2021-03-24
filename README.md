@@ -35,7 +35,7 @@ In the training data set for MiSiC the objects had a mean width of 10 pixels. So
 
 The noise parameter has been provide in order to prevent some false positive artifacts in the Phase Contrast images with high contrast and high quality. This is due to the "halo efect" of Phase Contrast technique (see below):
 
-!['handbook_noise.png'](./images/handbook_noise.png)
+!['handbook_noise2.png'](./images/handbook_noise2.png)
 
 
 # 2 - MiSiC
