@@ -37,6 +37,10 @@ The noise parameter has been provide in order to prevent some false positive art
 
 !['handbook_noise2.png'](./images/handbook_noise2.png)
 
+## e) Post-processing.
+
+Generally the masks yield by MiSiC for rod shape bacteria could be used as it. The MiSiCgui (see below) allow to save the probability map as a 8 bits image that could be simply thresholded or threshold it inside the GUI (labels generations) and save it as as 32 bits labeled mask. No image post-processing algorithm was implemented because the process depends on the desired result for a specific project, so the for user is more convinient to start with a raw mask (see supp data in ref.).
+
 
 # 2 - MiSiC
 ## a) Installation
