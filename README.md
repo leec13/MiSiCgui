@@ -21,7 +21,7 @@ MiSiC is based in a pre-trained convolutional network (CNN). It works for images
 
 These modalities are mostly used in for photonic microscopy. The MiSiC model was trained with a representaion of the image ("Shape Index") independent from the microscope modality, allowing to predict the binary masks from any of these tree kinds of images. MiSiC need to set if there are bright objects in a dark background (Brightfield and fluorescence) or dark objects in a light background (phase contrast)
 
-## c) Pre and post processing
+## c) Pre-processing
 
 Usually any pre processing step is required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expresion) may yield better results with a pre processing modifacation. For Phase Contrast images usually a slight correction of gamme over 1.0 could increase the contrast of light cells. For fluorescence images a gamma correction close to 0.2 and a Gaussian of Laplacian modifcation could increase the detectivity with MiSiC (see below) :
 
