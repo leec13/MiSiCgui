@@ -194,7 +194,11 @@ To process all slides of one stack slect "process all"
 
 The screenshots bellow explain each step :
 
+Firs step, determine a startinf value for the mean width parameter
+
 !['screen1.png'](./images/screen1.png)
+
+
 
 !['screen2.png'](/images/screen2.png)
 
