@@ -5,42 +5,40 @@ MiSiC & MiSiCgui Handbook
 
 !['handbook_workflow.png'](./images/handbook_workflow.png)
 
-MiSiC is a tool that allows to generate a segementation mask from microscopic images of bacteria cells. MiSiC solves the problem of images with a dense population of cells that are not correctly obtained by intensity threshold. Other tools based on supervised learning exists (supersegger, DeepCell, Ilastik, etc.). MiSiC accepts a wide range of bacterial morphologies and microscope modalities such as phase contrast, brightfield and fluorescence. MiSiC is not a quantification tool dedicated to measure the cellular features like area, length, position, etc (some convinient tools for this are MicrobeJ and Oufti). A grphical user interfafe is available 'MiSiCgui" (see bellow point 3). The main advantages of MiSiC are :
+MiSiC is a tool that allows to generate a segmentation mask from microscopic images of bacteria cells. MiSiC solves the problem of images with a dense population of cells that are not correctly obtained by intensity threshold. Other tools based on supervised learning exists (supersegger, DeepCell, Ilastik, etc.). MiSiC accepts a wide range of bacterial morphologies and microscope modalities such as phase contrast, brightfield and fluorescence. MiSiC is not a quantification tool dedicated to measuring the cellular features like area, length, position, etc (some convenient tools for this are MicrobeJ and Oufti). A graphical user interface is available 'MiSiCgui" (see bellow point 3). The main advantages of MiSiC are :
 
 - wide purpose pre trained model
 
 - only two parameters to set 
 
-Details are decribe in : ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
+Details are described in : ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 
 ## a) Recommended images: size, resolution and cells density
 
-MiSiC is based in a pre-trained convolutional network (CNN). It works for images obtained at high magnification and resolution (> 60x and N.A > 1.25), common CMOS cameras with a photosite size of around 6 µm yield a 60-100nm/pixel resolution. The CNN model was trained with synthetic data with a width of 10 image pixels. This value is in the range of bacteria cells size (≈ 1 µm). The size parameter adjust the size of the source image to be close to the training conditions (see bellow).
+MiSiC is based in a pre-trained convolutional network (CNN). It works for images obtained at high magnification and resolution (> 60x and N.A > 1.25), common CMOS cameras with a photosite size of around 6 µm yield a 60-100nm/pixel resolution. The CNN model was trained with synthetic data with a width of 10 image pixels. This value is in the range of bacteria cells size (≈ 1 µm). The size parameter adjusts the size of the source image to be close to the training conditions (see below).
 
 ## b) Phase Contrast, Brightfield, Fluorescence
 
-These modalities are mostly used in for photonic microscopy. The MiSiC model was trained with a representaion of the image ("Shape Index") independent from the microscope modality, allowing to predict the binary masks from any of these tree kinds of images. MiSiC need to set if there are bright objects in a dark background (Brightfield and fluorescence) or dark objects in a light background (phase contrast)
+These modalities are mostly used in photonic microscopy. The MiSiC model was trained with a representation of the image ("Shape Index") independent from the microscope modality, allowing to predict the binary masks from any of these three kinds of images. MiSiC need to set if there are bright objects in a dark background (Brightfield and fluorescence) or dark objects in a light background (phase contrast)
 
 ## c) Pre-processing
 
-Usually any pre processing step is required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expresion) may yield better results with a pre processing modifacation. For Phase Contrast images usually a slight correction of gamme over 1.0 could increase the contrast of light cells. For fluorescence images a gamma correction close to 0.2 and a Gaussian of Laplacian modifcation could increase the detectivity with MiSiC (see below) :
+Usually any pre processing step is required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expression) may yield better results with a pre processing modification. For Phase Contrast images usually a slight correction of gamme over 1.0 could increase the contrast of light cells. For fluorescence images a gamma correction close to 0.2 and a Gaussian of Laplacian modification could increase the detectivity with MiSiC (see below) :
 
 !['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
 
-In this example the pre processing of the fluorescence images improuves de quality of the prediction (100X NA 1.43 microsocpe objective, 0.06 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
+In this example the pre processing of the fluorescence images improves the quality of the prediction (100X NA 1.43 microscope objective, 0.06 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
 
 ## d) Parameters : size and noise
 
-In the training data set for MiSiC the objects had a mean width of 10 pixels. So a scale factor called "size" has been provide to adjust the mean size of the source data to a value close to 10 pixels.
-
-The noise parameter has been provide in order to prevent some false positive artifacts in the Phase Contrast images with high contrast and high quality. This is due to the "halo efect" of Phase Contrast technique (see below):
+In the training data set for MiSiC the objects had a mean width of 10 pixels. So a scale factor called "size" has been provided to adjust the mean size of the source data to a value close to 10 pixels.
+The noise parameter has been provide in order to prevent some false positive artifacts in the Phase Contrast images with high contrast and high quality. This is due to the "halo effect" of Phase Contrast technique (see below):
 
 !['handbook_noise2.png'](./images/handbook_noise2.png)
 
 ## e) Post-processing.
 
-Generally the masks yield by MiSiC for rod shape bacteria could be used as it. The MiSiCgui (see below) allow to save the probability map as a 8 bits image that could be simply thresholded or threshold it inside the GUI (labels generations) and save it as as 32 bits labeled mask. No image post-processing algorithm was implemented because the process depends on the desired result for a specific project, so the for user is more convinient to start with a raw mask (see supp data in ref.).
-
+Generally the masks yielded by MiSiC for rod shape bacteria could be used as it. The MiSiCgui (see below) allows you to save the probability map as a 8 bits image that could be simply threshold or threshold it inside the GUI (labels generations) and save it as a 32 bits labeled mask. No image post-processing algorithm was implemented because the process depends on the desired result for a specific project, so the for user is more convenient to start with a raw mask (see supp data in ref.).
 
 # 2 - MiSiC
 ## a) Installation
@@ -108,9 +106,9 @@ Please cite: ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 
 
 ## a) Installation
-Requires version python version 3.7 install via [pip]:
 
-we strong recommand to create a specific envronement with conda/miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+Requires version python version 3.7 install via [pip]:
+We strongly recommend creating a specific environment with conda/miniconda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
 
 After conda installation open a terminal and :
 
@@ -126,7 +124,7 @@ After conda installation open a terminal and :
 
 Windows :
 
-Sometimes needs to re-install numpy
+Sometimes you will need to re-install numpy
 
 `conda activate MiSiCgui`
 
@@ -134,9 +132,9 @@ Sometimes needs to re-install numpy
 
 Mac : 
 
-PyQt5 needs mac os > 10.13 (or manage to install pyqt5 exemple : https://gist.github.com/guillaumevincent/10983814)
+PyQt5 needs mac os > 10.13 (or manage to install pyqt5 example : https://gist.github.com/guillaumevincent/10983814)
 
-Sometimes needs to install Xcode.
+Sometimes you will need to install Xcode.
 
 or at least the gcc compiler :
 
@@ -184,17 +182,17 @@ Specific commands for MISICgui (respect the order)
 
 2 - Select a default directory
 
-Measure roughtly the mean width of cell (steps 2, 3, 4 in the screenshot bellow)
+3 - Measure roughly the mean width of cell (steps 2, 3, 4 in the screenshot below)
 
 5 - Set the mean width with the upper right button
 
 6 - click "get_mask" button
 
-To process all slides of one stack slect "process all"
+To process all slides of one stack select "process all"
 
-The screenshots bellow explain each step :
+The screenshots below explain each step :
 
-Firs step, determine a starting value for the mean width parameter
+First step, determine a starting value for the mean width parameter
 
 !['screen1.png'](./images/screen1.png)
 
