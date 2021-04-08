@@ -194,13 +194,15 @@ To process all slides of one stack slect "process all"
 
 The screenshots bellow explain each step :
 
-Firs step, determine a startinf value for the mean width parameter
+Firs step, determine a starting value for the mean width parameter
 
 !['screen1.png'](./images/screen1.png)
 
-
+Generate a mask for the current slide or for the whole time lapse stack
 
 !['screen2.png'](/images/screen2.png)
+
+Generate a threshold image labeled (works also for stacks)
 
 !['screen3.png'](./images/screen3.png)
 
