@@ -25,6 +25,8 @@ from PyQt5.QtWidgets import *
 from MiSiC.MiSiC import *
 #import MiSiCgui
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
 gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 
 misic = MiSiC()
