@@ -11,7 +11,7 @@ import glob
 
 from skimage.io import imsave,imread
 from skimage.transform import resize,rescale
-from skimage.util import random_noise,pad
+from skimage.util import random_noise
 import skimage.io
 from skimage.measure import label
 

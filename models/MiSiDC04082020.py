@@ -6,7 +6,7 @@ import numpy as np
 
 from skimage.transform import resize,rescale
 from skimage.feature import shape_index
-from skimage.util import pad,random_noise
+from skimage.util import random_noise
 from skimage.io import imread,imsave
 
 import matplotlib.pyplot as plt
@@ -31,7 +31,7 @@ class SegModel():
         if np.max(im) ==0:
             return sh
         pw = 15
-        im = pad(im,pw,'reflect')
+        im = np.pad(im,pw,'reflect')
         sh = np.zeros((im.shape[0],im.shape[1],n))    
         for i in range(n):
             sh[:,:,i] = shape_index(im,self.scalesvals[i])
@@ -43,7 +43,7 @@ class SegModel():
         pw = 16
         if invert:
             im = 1.0-im
-        im = pad(im,pw,'reflect')
+        im = np.pad(im,pw,'reflect')
         sh = self.preprocess(im)
 
         tiles,params = extract_tiles(sh,size = self.size,exclude=12)
