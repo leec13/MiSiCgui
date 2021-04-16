@@ -31,7 +31,8 @@ from PyQt5.QtWidgets import *
 
 
 import models
-import utils
+#import utils
+from MiSiCgui.utils import *
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 

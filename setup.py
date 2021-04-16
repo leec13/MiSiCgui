@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MiSiCgui", # Replace with your own username
-    version="0.2.5-alpha",
+    version="0.2.6-alpha",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
@@ -15,7 +15,7 @@ setuptools.setup(
     #packages=setuptools.find_packages(),
     packages=['MiSiCgui', 'models'],
     package_dir={'MiSiCgui': 'MiSiCgui', 'models': 'models'},
-    py_modules = ['utils', 'models.*'],
+    py_modules = ['models.*'],
     include_package_data=True,
     install_requires=[
         'PyQt5',
