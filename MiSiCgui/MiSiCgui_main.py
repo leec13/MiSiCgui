@@ -37,7 +37,7 @@ gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, 
 
 
 p = Path(__file__).parents[1]
-p = join(p, "MiSiCgui", "models")
+p = join(p, "MiSiCgui")
 print(p)
 modpaths = glob.glob(join(Path(p), "*.py"))
 MODELS = [ basename(f)[:-3] for f in modpaths if isfile(f) and not f.endswith('__init__.py')]
