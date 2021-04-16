@@ -11,6 +11,7 @@ import glob
 
 from skimage.io import imsave,imread
 from skimage.transform import resize,rescale
+from skimage.util import random_noise,pad
 import skimage.io
 from skimage.measure import label
 
@@ -30,7 +31,7 @@ from PyQt5.QtWidgets import *
 
 
 import models
-#import utils
+import utils
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
@@ -74,7 +75,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
             sr,sc = imp.shape
             imp = rescale(imp,scale)
             if noise > 0 : imp = random_noise(imp,mode = 'gaussian',var = noise)
-            imp = normalize2max(imp)
+            imp = utils.normalize2max(imp)
             y1 = misic.segment(imp,invert = invert)
             y = np.zeros((sr,sc,2))
             y[:,:,0] = resize(rescale(y1[:,:,0],1.0/scale),(sr,sc))
@@ -93,7 +94,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
         sr,sc = im.shape
         im = rescale(im,scale)
         if noise > 0 : im = random_noise(im, mode = 'gaussian', var = noise)
-        im = normalize2max(im)
+        im = utils.normalize2max(im)
         y1 = misic.segment(im,invert = invert)
         y = np.zeros((sr,sc,2))
         y[:,:,0] = resize(rescale(y1[:,:,0],1.0/scale),(sr,sc))
