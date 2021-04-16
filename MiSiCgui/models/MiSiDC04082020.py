@@ -46,7 +46,7 @@ class SegModel():
         im = pad(im,pw,'reflect')
         sh = self.preprocess(im)
 
-        tiles,params = extract_tiles(sh,size = self.size,padding = 8)
+        tiles,params = extract_tiles(sh,size = self.size,exclude=12)
 
         yp = self.model.predict(tiles)
 
