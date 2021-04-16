@@ -61,7 +61,7 @@ def updatemeta(metadict = gdict, idx = 1):
 def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, threshold=220):
     global gdict
 
-    noise = float(noise)
+    noise = float(noise)/10000
     rtim = np.zeros(gdict["gdims"])
     p = gdict["gpos"]
     global thresh
