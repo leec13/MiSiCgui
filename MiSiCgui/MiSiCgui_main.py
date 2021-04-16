@@ -76,7 +76,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
             sr,sc = imp.shape
             imp = rescale(imp,scale)
             if noise > 0 : imp = random_noise(imp,mode = 'gaussian',var = noise)
-            imp = utils.normalize2max(imp)
+            imp = normalize2max(imp)
             y1 = misic.segment(imp,invert = invert)
             y = np.zeros((sr,sc,2))
             y[:,:,0] = resize(rescale(y1[:,:,0],1.0/scale),(sr,sc))
@@ -95,7 +95,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
         sr,sc = im.shape
         im = rescale(im,scale)
         if noise > 0 : im = random_noise(im, mode = 'gaussian', var = noise)
-        im = utils.normalize2max(im)
+        im = normalize2max(im)
         y1 = misic.segment(im,invert = invert)
         y = np.zeros((sr,sc,2))
         y[:,:,0] = resize(rescale(y1[:,:,0],1.0/scale),(sr,sc))
