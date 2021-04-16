@@ -10,6 +10,7 @@ from pathlib import Path
 import glob
 
 from skimage.io import imsave,imread
+from skimage.transform import resize,rescale
 import skimage.io
 from skimage.measure import label
 
