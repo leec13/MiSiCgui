@@ -39,22 +39,19 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 
 
-p = Path(__file__).parents[1]
-p = join(p, "MiSiCgui", "models")
-print(p)
-modpaths = glob.glob(join(Path(p), "*.py"))
-MODELS = [ basename(f)[:-3] for f in modpaths if isfile(f) and not f.endswith('__init__.py')]
-print(MODELS)
-
-mmodd = MODELS[0]
+#p = Path(__file__).parents[1]
+#p = join(p, "MiSiCgui", "models")
+#print(p)
+#modpaths = glob.glob(join(Path(p), "*.py"))
+#MODELS = [ basename(f)[:-3] for f in modpaths if isfile(f) and not f.endswith('__init__.py')]
+#print(MODELS)
+#mmodd = MODELS[0]
 #modpath = modpaths[MODELS.index("misic_synthetic_b")]
-amodel = "models."+ mmodd
-currentModel = importlib.import_module(amodel)
+#amodel = "models."+ mmodd
+#currentModel = importlib.import_module(amodel)
+#misic = currentModel.SegModel()
 
-misic = currentModel.SegModel()
-
-#misic = MiSiC()
-#amodel = "/Users/leon/ownCloud/MacrosDropBox/pytoapp/MiSiCmodels/models/MiSiDC04082020.py"
+misic = MiSiC()
 viewer = None
 
 def updatemeta(metadict = gdict, idx = 1):
