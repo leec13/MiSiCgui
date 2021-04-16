@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MiSiCgui", # Replace with your own username
-    version="0.1.4-alpha",
+    version="0.1.5-alpha",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
@@ -21,12 +21,10 @@ setuptools.setup(
         'PyQt5',
         'napari',
         'magicgui',
-        'tiffile',
-        'MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'
+        'tiffile'
     ],
     package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]},
-    data_files=[('images', ['images/screen1.png'])],
-    dependency_links=['MiSiC @ git+https://github.com/pswapnesh/MiSiC.git'],
+    data_files=[('images', ['imagsetupes/screen1.png'])],
     entry_points = {
         'console_scripts': ['MISIC=MiSiCgui.MiSiCgui_main:main'],
     },
