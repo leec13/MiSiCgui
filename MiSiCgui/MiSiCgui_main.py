@@ -37,7 +37,7 @@ gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, 
 
 
 p = Path(__file__).parents[1]
-p = join(p, "MiSiCgui")
+p = join(p, "models")
 print(p)
 modpaths = glob.glob(join(Path(p), "*.py"))
 MODELS = [ basename(f)[:-3] for f in modpaths if isfile(f) and not f.endswith('__init__.py')]
@@ -45,6 +45,7 @@ print(MODELS)
 mmodd = MODELS[0]
 #modpath = modpaths[MODELS.index("MiSiDC04082020")]
 amodel = "models."+ mmodd
+print(amodel)
 currentModel = importlib.import_module(amodel)
 misic = currentModel.SegModel()
 
