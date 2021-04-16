@@ -24,7 +24,7 @@ setuptools.setup(
         'tiffile'
     ],
     package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]},
-    data_files=[('images', ['imagsetupes/screen1.png'])],
+    data_files=[('images', ['images/screen1.png'])],
     entry_points = {
         'console_scripts': ['MISIC=MiSiCgui.MiSiCgui_main:main'],
     },
