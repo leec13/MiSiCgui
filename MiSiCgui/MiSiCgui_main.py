@@ -29,7 +29,7 @@ from PyQt5.QtWidgets import *
 
 
 import models
-from utils import *
+#import utils
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
@@ -43,7 +43,7 @@ modpaths = glob.glob(join(Path(p), "*.py"))
 MODELS = [ basename(f)[:-3] for f in modpaths if isfile(f) and not f.endswith('__init__.py')]
 print(MODELS)
 mmodd = MODELS[0]
-modpath = modpaths[MODELS.index("misic_synthetic_b")]
+#modpath = modpaths[MODELS.index("MiSiDC04082020")]
 amodel = "models."+ mmodd
 currentModel = importlib.import_module(amodel)
 misic = currentModel.SegModel()
