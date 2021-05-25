@@ -1,6 +1,8 @@
 MiSiC & MiSiCgui Handbook
 =========================
 
+!['Logo_Misic-14.png'](./images/Logo_Misic-14.png)
+
 # 1 - Introduction 
 
 !['handbook_workflow.png'](./images/handbook_workflow.png)
