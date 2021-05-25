@@ -255,12 +255,12 @@ def main():
            
             return None
         
-        viewer.window.add_dock_widget(funcHELP)
+        viewer.window.add_dock_widget(funcHELP, area="bottom")
 
         @magicgui(mean_width = {'bind': ""}, call_button="get_WIDTH", result_widget=True, labels = False)
         def meanfunc(mean_width):
             
-            if (viewer.layers[-1].name == "Shapes") & (viewer.layers[-1].selected) :
+            if (viewer.layers[-1].name == "Shapes") & (viewer.layers[-1] in viewer.layers.selection) :
                 data = viewer.layers[-1].data
                 c = 0
                 for d in data:
