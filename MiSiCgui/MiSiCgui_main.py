@@ -133,7 +133,7 @@ def main():
             apath = filepicker.filename.value
             gdict["gDir"] = apath
             if len(viewer.layers) > 0 :
-                gdict["gfilename"] = os.path.join(apath, viewer.active_layer.name)
+                gdict["gfilename"] = os.path.join(apath, viewer.layers.selection.active.name)
         
         def changelabels(event_thr):
 
@@ -145,7 +145,7 @@ def main():
 
             #if ('image_mask result' in laynames)  :
                 #im = viewer.layers['image_mask result'].data > (thresh)
-            im = viewer.layers[viewer.active_layer.name].data > (thresh)
+            im = viewer.layers[viewer.layers.selection.active.name].data > (thresh)
             label_image = label(im)
                 #viewer.add_labels(label_image, name="seg")
             gdict["gthresh"] = thresh
@@ -163,7 +163,7 @@ def main():
         def image_mask(layer: Image, mean_width = 6, noise = "0.00", PhaseContrast = True, process_all = False) -> 'napari.types.ImageData':
             global gdict
             laynames = [ l.name for l in viewer.layers]
-            idx = laynames.index(viewer.active_layer.name)
+            idx = laynames.index(viewer.layers.selection.active.name)
 
             p = tuple([int(round(x)) for x in viewer.dims.point])
             #print("pressed", viewer.layers)
