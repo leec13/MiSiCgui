@@ -140,9 +140,10 @@ def main():
             print(make_labels.threshold.value)
             thresh = make_labels.threshold.value
             laynames = [ l.name for l in viewer.layers]
-            selects = [l.selected for l in viewer.layers]
-            idx = selects.index(True)
-
+            #selects = [l.selected for l in viewer.layers]
+            idx = laynames.index(viewer.layers.selection.active.name)
+            #idx = selects.index(True)
+            
             #if ('image_mask result' in laynames)  :
                 #im = viewer.layers['image_mask result'].data > (thresh)
             im = viewer.layers[viewer.layers.selection.active.name].data > (thresh)
@@ -154,11 +155,13 @@ def main():
                 viewer.layers['seg'].data = label_image
                 #i = laynames.index("seg")
                 #viewer.layers.pop(i)
-                #viewer.layers.selection.remove(viewer.layers['seg'])
+                if viewer.layers['seg'] in viewer.layers.selection :
+                    viewer.layers.selection.remove(viewer.layers['seg'])
                 viewer.layers.selection.add(viewer.layers[idx])
             else :
                 viewer.add_labels(label_image, name="seg")
-                #viewer.layers.selection.remove(viewer.layers['seg'])
+                if viewer.layers['seg'] in viewer.layers.selection :
+                    viewer.layers.selection.remove(viewer.layers['seg'])
                 viewer.layers.selection.add(viewer.layers[idx])
 
             #viewer.layers['seg'].selected = False
