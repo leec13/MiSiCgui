@@ -94,12 +94,7 @@ imsave('segmented.tif', yp.astype(np.uint8))
 
 # 3 - MiSiCgui
 
-A GUI for MiSiC tool
-
-Based on MiSiC ("https://github.com/pswapnesh/MiSiC")
-
-Please cite: ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
-
+A Graphic User Interface (GUI) for MiSiC
 
 ## a) Installation
 
