@@ -224,7 +224,7 @@ def main():
         def make_labels(threshold = 220, value = "220"):
             return threshold
 
-        viewer.window.add_dock_widget(make_labels)
+        viewer.window.add_dock_widget(make_labels, area="bottom")
         make_labels.threshold.changed.connect(changelabels)
         
 
@@ -234,7 +234,7 @@ def main():
             imsave(str(gdict["gfilename"])+"_thresh_"+str(gdict["gthresh"])+"_labels.tif",(-4294967295.0*viewer.layers["seg"].data).astype(np.uint32))
             return None
 
-        viewer.window.add_dock_widget(funcsave_labels)
+        viewer.window.add_dock_widget(funcsave_labels, area="bottom")
 
         @magicgui(call_button="HELP")
         def funcHELP():
