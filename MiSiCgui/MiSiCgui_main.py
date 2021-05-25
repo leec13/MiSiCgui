@@ -154,11 +154,17 @@ def main():
                 viewer.layers['seg'].data = label_image
                 #i = laynames.index("seg")
                 #viewer.layers.pop(i)
-            else : viewer.add_labels(label_image, name="seg")
+                #viewer.layers.selection.remove(viewer.layers['seg'])
+                viewer.layers.selection.add(viewer.layers[idx])
+            else :
+                viewer.add_labels(label_image, name="seg")
+                #viewer.layers.selection.remove(viewer.layers['seg'])
+                viewer.layers.selection.add(viewer.layers[idx])
+
             #viewer.layers['seg'].selected = False
-            viewer.layers.selection.remove(viewer.layers['seg'])
+            #viewer.layers.selection.remove(viewer.layers['seg'])
             #viewer.layers[idx].selected = True
-            viewer.layers.selection.add(viewer.layers[idx])
+            #viewer.layers.selection.add(viewer.layers[idx])
 
 
 
