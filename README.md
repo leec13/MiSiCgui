@@ -40,27 +40,21 @@ A noise parameter (in the GUI see below the value is divided by 104) can also be
 MiSiCgui (see below) saves the probability map as an 8 bits image that can be thresholded for semantic cell recognition and saved a 32 bits labeled mask.Post processing depends on desired application. In dense regions, when not fully resolved cell separation and septa can be improved by applying algorithms on the mask such as watershed or even supersegger. Cells may also be filtered by available softwares such as MicrobeJ and Oufti. 
 
 # 2 - MiSiC
+
+Based on MiSiC ("https://github.com/pswapnesh/MiSiC")
+
 ## a) Installation
-Requires version python version 3.6
+Requires version python version 3.6/7
 
-`pip install git+https://github.com/pswapnesh/MiSIC.git`
+`pip install misic`
 
-or 
-
-`pip install https://github.com/pswapnesh/MiSiC/archive/master.zip`
-
-
-
-## b) Usage
-### command line
-`mbnet --light_background True --mean_width 8 --src '/path/to/source/folder/\*.tif' --dst '/path/to/destination/folder/'`
-
-`mbnet -lb True -mw 8 -s /path/to/source/folder/*.tif -d /path/to/destination/folder/`
 
 ### use package
+
 ```python
-from MiSiC.MiSiC import *
+from misic.misic import *
 from skimage.io import imsave,imread
+from skimage.transform import resize,rescale
 
 filename = 'awesome_image.tif'
 
@@ -72,30 +66,33 @@ im = imread(filename)
 
 #input the approximate mean width of microbe under consideration
 mean_width = 8
-noise_variance = 0.0001
 
 # compute scaling factor
 scale = (10/mean_width)
 
 # Initialize MiSiC
-misic = MiSiC()
+mseg = MiSiC()
 
 # preprocess using inbuit function or if you are feeling lucky use your own preprocessing
-im = pre_processing(im,scale = scale, noise_var = noise_variance)
+im = rescale(im,scale,preserve_range = True)
 
-# segment the image with invert = True for light backgraound images like Phase contrast
-y = misic.segment(im,invert = True)
+# add local noise
+img = add_noise(im,sensitivity = 0.13,invert = True)
 
-# if you need both the body y[:,:,0] and contour y[:,:,1] skip the post processing.
-y = post_processing(y,im.shape)
+# segment
+yp = mseg.segment(img,invert = True)
+yp = resize(yp,[sr,sc,-1])
+
+# watershed based post processing
+yp = postprocess_ws(img,yp)
 
 # save 8-bit segmented image and use it as you like
-imsave('segmented.tif', (y*255).astype(np.uint8))
+imsave('segmented.tif', yp.astype(np.uint8))
 
+### In case of gpu error, one might need to disabple gpu before importing MiSiC [ os.environ["CUDA_VISIBLE_DEVICES"]="-1" ]
 ```
 
 # 3 - MiSiCgui
-
 
 A GUI for MiSiC tool
 
