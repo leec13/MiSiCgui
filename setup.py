@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MiSiCgui", # Replace with your own username
-    version="0.2.7-alpha",
+    version="0.2.8-alpha",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
@@ -18,10 +18,14 @@ setuptools.setup(
     py_modules = ['models.*'],
     include_package_data=True,
     install_requires=[
+        'numpy',
         'PyQt5',
         'napari',
         'magicgui',
-        'tiffile'
+        'tiffile',
+        'scikit-image',
+        'importlib',
+        'pathlib'
     ],
     package_data={"": ["*.png"],"MiSiCgui": ["images/*.png"]},
     data_files=[('images', ['images/screen1.png'])],
