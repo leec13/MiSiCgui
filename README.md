@@ -1,7 +1,7 @@
+!['Logo_Misic-14small.png'](./images/Logo_Misic-14small.png)
+
 MiSiC & MiSiCgui Handbook
 =========================
-
-!['Logo_Misic-14small.png'](./images/Logo_Misic-14small.png)
 
 # 1 - Introduction 
 
