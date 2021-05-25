@@ -155,8 +155,11 @@ def main():
                 #i = laynames.index("seg")
                 #viewer.layers.pop(i)
             else : viewer.add_labels(label_image, name="seg")
-            viewer.layers['seg'].selected = False
-            viewer.layers[idx].selected = True
+            #viewer.layers['seg'].selected = False
+            viewer.layers.selection.remove(viewer.layers['seg'])
+            #viewer.layers[idx].selected = True
+            viewer.layers.selection.add(viewer.layers[idx])
+
 
 
         @magicgui(call_button="get_mask", layout="vertical")
