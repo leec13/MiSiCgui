@@ -11,7 +11,7 @@ from skimage.io import imread,imsave
 
 import matplotlib.pyplot as plt
 
-from MiSiC.utils import *
+from MiSiCgui.utils import *
 #from utils_gui import *
 
 class SegModel():
