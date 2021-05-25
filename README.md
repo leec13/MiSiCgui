@@ -5,13 +5,12 @@ MiSiC & MiSiCgui Handbook
 
 !['handbook_workflow.png'](./images/handbook_workflow.png)
 
-MiSiC is a tool that allows to generate a segmentation mask from microscopic images of bacteria cells. MiSiC solves the problem of images with a dense population of cells that are not correctly obtained by intensity threshold. Other tools based on supervised learning exists (supersegger, DeepCell, Ilastik, etc.). MiSiC accepts a wide range of bacterial morphologies and microscope modalities such as phase contrast, brightfield and fluorescence. MiSiC is not a quantification tool dedicated to measuring the cellular features like area, length, position, etc (some convenient tools for this are MicrobeJ and Oufti). A graphical user interface is available 'MiSiCgui" (see bellow point 3). The main advantages of MiSiC are :
+MiSiC is a tool that allows generating a segmentation mask from microscopic images of bacterial cells. MiSiC has the capacity to detect and segment bacterial cells in microcolonies and/or dense images, which is not achievable using intensity thresholds.. MiSiC can handle a wide range of bacterial morphologies and microscope modalities such as phase contrast, brightfield and fluorescence. MiSiC functions upstream of specialised tools for bacterial cell biology dedicated to measuring cellular features like area, length, position, etc (some convenient tools for this are MicrobeJ and Oufti). A graphical user interface named 'MiSiCgui"is available  (see below point 3). The main advantages of MiSiC are :
 
-- wide purpose pre trained model
+- Provide a pre-trained model with general detection capacities under various imaging modalities
 
-- only two parameters to set 
+- Provide an easy parameter handling with a graphical user interface
 
-Details are described in : ("https://www.biorxiv.org/content/10.1101/2020.10.07.328666v1")
 
 ## a) Recommended images: size, resolution and cells density
 
