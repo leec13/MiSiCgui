@@ -28,7 +28,21 @@ In most cases, pre-processing is not required. However some low quality images o
 
 !['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
 
-In this example the pre-processing of the fluorescence images improves the quality of the prediction (100X NA 1.43 microscope objective, 0.06 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
+In this example the pre-processing of the fluorescence images improves the quality of the prediction (100X NA 1.43 microscope objective, 0.067 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
+
+If needed thes settings could be used to improve the results with MiSiC:
+
+Phase Contrast:
+Gaussian of laplace (sigma = 2)
+additive noise preferably local noise variance
+
+Fluorescence:
+Gamma correction (0.2-0.5):
+Unsharp mask (radius = 1, amount = 2)
+(optional) Gaussian of laplace (sigma = 2)
+Often, in fluorescence images, not all cells fluoresce at similar intensities. This leads to False negatives where the cells are faint. Gamma correction homogenises these dissimilar intensities. Unsharp mask provides a higher definition at the edges. 
+
+
 
 ## d) Parameters : size and noise
 
