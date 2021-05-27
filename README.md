@@ -33,13 +33,19 @@ In this example the pre-processing of the fluorescence images improves the quali
 If needed thes settings could be used to improve the results with MiSiC:
 
 Phase Contrast:
+
 Gaussian of laplace (sigma = 2)
+
 additive noise preferably local noise variance
 
 Fluorescence:
+
 Gamma correction (0.2-0.5):
+
 Unsharp mask (radius = 1, amount = 2)
+
 (optional) Gaussian of laplace (sigma = 2)
+
 Often, in fluorescence images, not all cells fluoresce at similar intensities. This leads to False negatives where the cells are faint. Gamma correction homogenises these dissimilar intensities. Unsharp mask provides a higher definition at the edges. 
 
 
@@ -53,7 +59,28 @@ A noise parameter (in the GUI see below the value is divided by 104) can also be
 
 ## e) Post-processing.
 
-MiSiCgui (see below) saves the probability map as an 8 bits image that can be thresholded for semantic cell recognition and saved a 32 bits labeled mask.Post processing depends on desired application. In dense regions, when not fully resolved cell separation and septa can be improved by applying algorithms on the mask such as watershed or even supersegger. Cells may also be filtered by available softwares such as MicrobeJ and Oufti. 
+MiSiCgui (see below) saves the probability map as an 8 bits image that can be thresholded for semantic cell recognition and saved a 32 bits labeled mask. Post processing depends on desired application. In dense regions, when not fully resolved cell separation and septa can be improved by applying algorithms on the mask such as watershed or even supersegger. Cells may also be filtered by available softwares such as MicrobeJ and Oufti. 
+
+For example, watershed methods may be used to obtain a more accurate segmentation that aligns with cell boundaries or to well-separated cells when needed.
+An example algorithm is illustrated in the following pseudo-code:
+
+````
+============================================
+# valid pixels with probability > 0.4
+mask = body_prediction > 0.4 
+
+# the watershed potential. This could be original image or processed image # that enhanced edge.
+watershed_potential = original_image
+
+# the unique markers at each cell. Thus, only pixels with high probability # are picked
+watershed_markers = connected_components(body_prediction>0.95)
+
+# segmentation using watershed
+segmented_image = watershed_method(potential = watershed_potential,markers    = watershed_markers, mask = mask) 
+============================================
+````
+
+
 
 # 2 - MiSiC
 
