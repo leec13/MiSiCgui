@@ -77,7 +77,7 @@ segmented_image = watershed_method(potential = watershed_potential,markers    = 
 
 
 
-# 2 - MiSiC
+# 2 - MiSiC package
 
 Based on MiSiC ("https://github.com/pswapnesh/MiSiC")
 
