@@ -48,7 +48,7 @@ Often, in fluorescence images, not all cells fluoresce at similar intensities. T
 ## d) Parameters : size and noise
 
 In the training data set for MiSiC the objects had a mean width of 10 pixels. So a scale parameter called "size" is provided to adjust the mean size of the source data to a value close to 10 pixels.
-A noise parameter (in the GUI see below the value is divided by 10<sup>4</sup>) can also be adjusted  to prevent false positive artifacts in the Phase Contrast images with high contrast and high quality. This is due to the "halo effect" of Phase Contrast technique (see below):
+A noise parameter (in the GUI see below the value is divided by 10<sup>4</sup>) can also be adjusted  to prevent false positive artifacts. Positive artifacts may arise due to to scaling of the image smooths out the image noise, leading to regions in the image that have a smoother shape index map. Also, since the shape-index-map keeps the shape information and not the intensity values, even recently dead cells or faint background objects that are of relatively low contrast may be detected as cells. Thus, degrading the image with additive gaussian noise is a way to reduce the spurioussuprius detection of faint objects
 
 !['handbook_noise2.png'](./images/handbook_noise2.png)
 
