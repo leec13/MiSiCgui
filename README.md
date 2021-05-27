@@ -125,6 +125,8 @@ Sometimes you will need to re-install numpy
 
 Mac : 
 
+Big Sur creates an issue with OpenGL (https://github.com/python/cpython/pull/21241). Maybe it could be fix with this recipes : https://stackoverflow.com/questions/66424295/pyopengl-installation-on-macos-big-sur https://stackoverflow.com/questions/63475461/unable-to-import-opengl-gl-in-python-on-macos
+
 PyQt5 needs mac os > 10.13 (or manage to install pyqt5 example : https://gist.github.com/guillaumevincent/10983814)
 
 Sometimes you will need to install Xcode.
