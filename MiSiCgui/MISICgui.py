@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import os, sys
-from pathlib import Path
+#import os, sys
+#from pathlib import Path
 
-from skimage.io import imsave,imread
-import skimage.io
-from skimage.measure import label
+#from skimage.io import imsave,imread
+#import skimage.io
+#from skimage.measure import label
 #from skimage.external import tifffile as tifffile
-import tiffile as tiffile
-import numpy as np
+#import tiffile as tiffile
+#import numpy as np
 #from skimage.transform import resize,rescale
 #from skimage.filters import gaussian, laplace, threshold_otsu, median
 #from skimage.util import random_noise,pad
@@ -20,18 +20,18 @@ import numpy as np
 #from tensorflow.keras.utils import get_file 
 
 
-import napari
-from napari.layers import Image
-from magicgui import magicgui
-from magicgui._qt.widgets import QDoubleSlider
-from magicgui import event_loop, magicgui
-from PyQt5.QtWidgets import QDoubleSpinBox
-from PyQt5.QtCore import Qt
+#import napari
+#from napari.layers import Image
+#from magicgui import magicgui
+#from magicgui._qt.widgets import QDoubleSlider
+#from magicgui import event_loop, magicgui
+#from PyQt5.QtWidgets import QDoubleSpinBox
+#from PyQt5.QtCore import Qt
 
 #import PIL
 #from PIL.TiffTags import TAGS
 
-from MiSiC.MiSiC import *
+#rom MiSiC.MiSiC import *
 
 
 gdict = {"gDir":"", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "ginvert" : None, "gpos" : None, "gsave_all" : None}

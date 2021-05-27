@@ -31,6 +31,6 @@ from PyQt5.QtCore import Qt
 #import PIL
 #from PIL.TiffTags import TAGS
 
-from MiSiC.MiSiC import *
+#from MiSiC.MiSiC import *
 
 pass
