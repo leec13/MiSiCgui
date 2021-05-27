@@ -32,18 +32,13 @@ In this example the pre-processing of the fluorescence images improves the quali
 
 If needed thes settings could be used to improve the results with MiSiC:
 
-Phase Contrast:
-
-Gaussian of laplace (sigma = 2)
-
+Phase Contrast:__
+Gaussian of laplace (sigma = 2)__
 additive noise preferably local noise variance
 
-Fluorescence:
-
-Gamma correction (0.2-0.5):
-
-Unsharp mask (radius = 1, amount = 2)
-
+Fluorescence:__
+Gamma correction (0.2-0.5)__
+Unsharp mask (radius = 1, amount = 2)__
 (optional) Gaussian of laplace (sigma = 2)
 
 Often, in fluorescence images, not all cells fluoresce at similar intensities. This leads to False negatives where the cells are faint. Gamma correction homogenises these dissimilar intensities. Unsharp mask provides a higher definition at the edges. 
