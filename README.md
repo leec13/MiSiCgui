@@ -34,7 +34,7 @@ improve the definition of the edges between bacteria.
 We have identified that procedures such as “gamma adjustment”, sharpening with “unsharp mask” and “gaussian laplace edge detection” may be used to enhance the MiSiC segmentation outputs, individually or in combination. A few recommendations for preprocessing are mentioned below:
 
 Phase Contrast:\
-Gaussian of laplace (sigma = 2)\
+Gaussian of laplace (sigma = 2)
 
 Fluorescence:\
 Gamma correction (0.2-0.5)\
@@ -52,7 +52,7 @@ These procedures improve the MiSiC mask as shown below:
 ## d) Parameters : size and noise
 
 **Size.** The CNN model was trained with synthetic cell shapes with a 10 pixels width. This value was chosen to match the average pixel width of bacterial cells (which typically varies between 0.5-1 µm) observed at typical resolutions (see a). Therefore, the size parameter is meant to scale the size of the source image to the size of the objects used to train the model. We show how it can be adjusted in the GUI below.
-**Noise.** Noise can be added to prevent false detection of non-cell objects to the scaling procedure. Noise can be tuned from a scale of 0-10 .10<super>-4</super> in the GUI (see below).
+**Noise.** Noise can be added to prevent false detection of non-cell objects to the scaling procedure. Noise can be tuned from a scale of 0-10.10<sup>-4</sup> in the GUI (see below).
 Example of mask optimization using the size and noise parameters:
 
 
