@@ -24,24 +24,66 @@ The MiSiC model was trained with a representation of the image ("Shape Index") t
 
 ## c) Pre-processing
 
-In most cases, pre-processing is not required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expression) may yield better results with a pre-processing modification. For Phase Contrast images a slight gamma correction over 1.0 may improve the contrast of light cells. For fluorescence images a gamma correction close to 0.2 and a Gaussian of Laplacian modification may increase the detectivity with MiSiC. An example is shown below:
+
+In most cases, pre-processing is not required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expression) may yield better results with a pre-processing modification.
+
+**Recommendations and thumb rules.** In general, the main objectives of a preprocessing pipeline will be to:
+homogenize contrast such that it is almost similar between cells. 
+improve the definition of the edges between bacteria. 
+
+We have identified that procedures such as “gamma adjustment”, sharpening with “unsharp mask” and “gaussian laplace edge detection” may be used to enhance the MiSiC segmentation outputs, individually or in combination. A few recommendations for preprocessing are mentioned below:
+
+Phase Contrast:\
+Gaussian of laplace (sigma = 2)
+
+Fluorescence:\
+Gamma correction (0.2-0.5)\
+Unsharp mask (radius = 1, amount = 2)\
+(optional) Gaussian of laplace (sigma = 2)
+
+In fluorescence images, depending on the probe (ie a fluorescent genetic reporter protein), it is frequent that variable intensities are observed between cells. This leads to false negatives where the cells are faint. In this case gamma correction and a Gaussian of laplace help homogenise cell intensities. Unsharp mask provides a higher definition at the edges. 
+These procedures improve the MiSiC mask as shown below:
 
 !['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
 
-In this example the pre-processing of the fluorescence images improves the quality of the prediction (100X NA 1.43 microscope objective, 0.06 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
+*(100X NA 1.43 microscope objective, 0.067 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)*
+
 
 ## d) Parameters : size and noise
 
-In the training data set for MiSiC the objects had a mean width of 10^4 pixels. So a scale parameter called "size" is provided to adjust the mean size of the source data to a value close to 10 pixels.
-A noise parameter (in the GUI see below the value is divided by 104) can also be adjusted  to prevent false positive artifacts in the Phase Contrast images with high contrast and high quality. This is due to the "halo effect" of Phase Contrast technique (see below):
+**Size.** The CNN model was trained with synthetic cell shapes with a 10 pixels width. This value was chosen to match the average pixel width of bacterial cells (which typically varies between 0.5-1 µm) observed at typical resolutions (see a). Therefore, the size parameter is meant to scale the size of the source image to the size of the objects used to train the model. We show how it can be adjusted in the GUI below.
+**Noise.** Noise can be added to prevent false detection of non-cell objects to the scaling procedure. Noise can be tuned from a scale of 0 to 10 (x10<sup>-4</sup>) in the GUI (see below).
+Example of mask optimization using the size and noise parameters:
+
 
 !['handbook_noise2.png'](./images/handbook_noise2.png)
 
 ## e) Post-processing.
 
-MiSiCgui (see below) saves the probability map as an 8 bits image that can be thresholded for semantic cell recognition and saved a 32 bits labeled mask.Post processing depends on desired application. In dense regions, when not fully resolved cell separation and septa can be improved by applying algorithms on the mask such as watershed or even supersegger. Cells may also be filtered by available softwares such as MicrobeJ and Oufti. 
+MiSiCgui (see below) saves the probability map as an 8 bits image that can be thresholded for semantic cell recognition and saved a 32 bits labeled mask. Post processing depends on desired application. In dense regions, when not fully resolved cell separation and septa can be improved by applying algorithms on the mask such as watershed or even supersegger. Cells may also be filtered by available softwares such as MicrobeJ and Oufti. 
 
-# 2 - MiSiC
+For example, watershed methods may be used to obtain a more accurate segmentation that aligns with cell boundaries or to well-separated cells when needed.
+An example algorithm is illustrated in the following pseudo-code:
+
+````
+============================================
+# valid pixels with probability > 0.4
+mask = body_prediction > 0.4 
+
+# the watershed potential. This could be original image or processed image # that enhanced edge.
+watershed_potential = original_image
+
+# the unique markers at each cell. Thus, only pixels with high probability # are picked
+watershed_markers = connected_components(body_prediction>0.95)
+
+# segmentation using watershed
+segmented_image = watershed_method(potential = watershed_potential,markers    = watershed_markers, mask = mask) 
+============================================
+````
+
+
+
+# 2 - MiSiC package
 
 Based on MiSiC ("https://github.com/pswapnesh/MiSiC")
 
@@ -124,6 +166,8 @@ Sometimes you will need to re-install numpy
 `conda install numpy`
 
 Mac : 
+
+Big Sur creates an issue with OpenGL (https://github.com/python/cpython/pull/21241). Maybe it could be fix with this recipes : https://stackoverflow.com/questions/66424295/pyopengl-installation-on-macos-big-sur https://stackoverflow.com/questions/63475461/unable-to-import-opengl-gl-in-python-on-macos
 
 PyQt5 needs mac os > 10.13 (or manage to install pyqt5 example : https://gist.github.com/guillaumevincent/10983814)
 
