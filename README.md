@@ -24,31 +24,37 @@ The MiSiC model was trained with a representation of the image ("Shape Index") t
 
 ## c) Pre-processing
 
-In most cases, pre-processing is not required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expression) may yield better results with a pre-processing modification. For Phase Contrast images a slight gamma correction over 1.0 may improve the contrast of light cells. For fluorescence images a gamma correction close to 0.2 and a Gaussian of Laplacian modification may increase the detectivity with MiSiC. An example is shown below:
 
-!['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
+In most cases, pre-processing is not required. However some low quality images or images with a wide range of intensities (i.e. fluorescence signal with an heterogeneous protein expression) may yield better results with a pre-processing modification.
 
-In this example the pre-processing of the fluorescence images improves the quality of the prediction (100X NA 1.43 microscope objective, 0.067 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)
+**Recommendations and thumb rules.** In general, the main objectives of a preprocessing pipeline will be to:
+homogenize contrast such that it is almost similar between cells. 
+improve the definition of the edges between bacteria. 
 
-If needed thes settings could be used to improve the results with MiSiC:
+We have identified that procedures such as “gamma adjustment”, sharpening with “unsharp mask” and “gaussian laplace edge detection” may be used to enhance the MiSiC segmentation outputs, individually or in combination. A few recommendations for preprocessing are mentioned below:
 
 Phase Contrast:\
 Gaussian of laplace (sigma = 2)\
-additive noise preferably local noise variance
 
 Fluorescence:\
 Gamma correction (0.2-0.5)\
 Unsharp mask (radius = 1, amount = 2)\
 (optional) Gaussian of laplace (sigma = 2)
 
-Often, in fluorescence images, not all cells fluoresce at similar intensities. This leads to False negatives where the cells are faint. Gamma correction homogenises these dissimilar intensities. Unsharp mask provides a higher definition at the edges. 
+In fluorescence images, depending on the probe (ie a fluorescent genetic reporter protein), it is frequent that variable intensities are observed between cells. This leads to false negatives where the cells are faint. In this case gamma correction and a Gaussian of laplace help homogenise cell intensities. Unsharp mask provides a higher definition at the edges. 
+These procedures improve the MiSiC mask as shown below:
 
+!['handbook_pre_processing.png'](./images/handbook_pre_processing.png)
+
+*(100X NA 1.43 microscope objective, 0.067 µm/pixel; gamma correction = 0.25 ; Laplacian filter ; Gaussian filter r = 2 px)*
 
 
 ## d) Parameters : size and noise
 
-In the training data set for MiSiC the objects had a mean width of 10 pixels. So a scale parameter called "size" is provided to adjust the mean size of the source data to a value close to 10 pixels.
-A noise parameter (in the GUI see below the value is divided by 10<sup>4</sup>) can also be adjusted  to prevent false positive artifacts. Positive artifacts may arise due to to scaling of the image smooths out the image noise, leading to regions in the image that have a smoother shape index map. Also, since the shape-index-map keeps the shape information and not the intensity values, even recently dead cells or faint background objects that are of relatively low contrast may be detected as cells. Thus, degrading the image with additive gaussian noise is a way to reduce the spurioussuprius detection of faint objects
+**Size.** The CNN model was trained with synthetic cell shapes with a 10 pixels width. This value was chosen to match the average pixel width of bacterial cells (which typically varies between 0.5-1 µm) observed at typical resolutions (see a). Therefore, the size parameter is meant to scale the size of the source image to the size of the objects used to train the model. We show how it can be adjusted in the GUI below.
+**Noise.** Noise can be added to prevent false detection of non-cell objects to the scaling procedure. Noise can be tuned from a scale of 0-10 .10<super>-4</super> in the GUI (see below).
+Example of mask optimization using the size and noise parameters:
+
 
 !['handbook_noise2.png'](./images/handbook_noise2.png)
 
