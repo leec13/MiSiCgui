@@ -56,7 +56,7 @@ These procedures improve the MiSiC mask as shown below:
 Example of mask optimization using the size and noise parameters:
 
 
-!['handbook pre processingNoise.001.png'](./images/handbook pre processingNoise.001.png)
+!['handbook_Noise_002.png'](./images/handbook_Noise_002.png)
 
 ## e) Post-processing.
 
