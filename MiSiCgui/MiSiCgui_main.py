@@ -33,6 +33,7 @@ from PyQt5.QtWidgets import *
 import models
 #import utils
 from MiSiCgui.utils import *
+from MiSiCgui.extras import *
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
@@ -52,7 +53,6 @@ print(amodel)
 currentModel = importlib.import_module(amodel)
 misic = currentModel.SegModel()
 
-#misic = MISIC()
 viewer = None
 
 def updatemeta(metadict = gdict, idx = 1):
@@ -62,7 +62,8 @@ def updatemeta(metadict = gdict, idx = 1):
 def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, threshold=220):
     global gdict
 
-    noise = float(noise)/10000
+    #noise = float(noise)/10000
+    noise = float(noise)
     rtim = np.zeros(gdict["gdims"])
     p = gdict["gpos"]
     global thresh
@@ -75,7 +76,8 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
             imp = im[iT,:,:]
             sr,sc = imp.shape
             imp = rescale(imp,scale)
-            if noise > 0 : imp = random_noise(imp,mode = 'gaussian',var = noise)
+            #if noise > 0 : imp = random_noise(imp,mode = 'gaussian',var = noise)
+            if noise > 0 : imp = add_noise(imp ,sensitivity = noise ,invert = invert)
             imp = normalize2max(imp)
             y1 = misic.segment(imp,invert = invert)
             y = np.zeros((sr,sc,2))
@@ -94,7 +96,8 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
         hyperS = np.zeros(im.shape)
         sr,sc = im.shape
         im = rescale(im,scale)
-        if noise > 0 : im = random_noise(im, mode = 'gaussian', var = noise)
+        #if noise > 0 : im = random_noise(im, mode = 'gaussian', var = noise)
+        if noise > 0 : im = add_noise(im ,sensitivity = noise ,invert = invert)
         im = normalize2max(im)
         y1 = misic.segment(im,invert = invert)
         y = np.zeros((sr,sc,2))
@@ -172,7 +175,7 @@ def main():
 
 
         @magicgui(call_button="get_mask", layout="vertical")
-        def image_mask(layer: Image, mean_width = 6, noise = "0.00", PhaseContrast = True, process_all = False) -> 'napari.types.ImageData':
+        def image_mask(layer: Image, mean_width = 6, sensitivity = "0.00", PhaseContrast = True, process_all = False) -> 'napari.types.ImageData':
             global gdict
             laynames = [ l.name for l in viewer.layers]
             idx = laynames.index(viewer.layers.selection.active.name)
@@ -187,13 +190,13 @@ def main():
                 gdict["gfilename"] = os.path.join(gdict["gDir"], layer.name)
                 gdict["gdims"] = layer.data.shape
                 gdict["width"] = mean_width
-                gdict["gnoise"] = noise
+                gdict["gnoise"] = sensitivity
                 gdict["ginvert"] = PhaseContrast
                 gdict["gpos"] = p
                 gdict["gsave_all"] = process_all
 
                 updatemeta(gdict, idx)
-                return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
+                return seg_img(img, scale=round(10/mean_width, 2), noise=sensitivity, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
 
             else:
                 if layer.data.ndim == 5 : img = layer.data[p[0], p[1], p[2],:,:]
@@ -203,14 +206,14 @@ def main():
                 gdict["gfilename"] = os.path.join(gdict["gDir"], layer.name)
                 gdict["gdims"] = layer.data.shape
                 gdict["width"] = mean_width
-                gdict["gnoise"] = noise
+                gdict["gnoise"] = sensitivity
                 gdict["ginvert"] = PhaseContrast
                 gdict["gpos"] = p
                 gdict["gsave_all"] = process_all
 
                 updatemeta(gdict, idx)
 
-                return seg_img(img, scale=round(10/mean_width, 2), noise=noise, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
+                return seg_img(img, scale=round(10/mean_width, 2), noise=sensitivity, invert=PhaseContrast, frame = viewer.dims.point[0], save=process_all)
         
         viewer.window.add_dock_widget(image_mask, area="right")
         viewer.layers.events.changed.connect(updatelayer)

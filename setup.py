@@ -5,7 +5,7 @@ with open('README.md','r', encoding='utf8') as fh:
 
 setuptools.setup(
     name="MiSiCgui", # Replace with your own username
-    version="0.4.1-alpha",
+    version="0.4.2-alpha",
     author="L.Espinosa",
     author_email="leonespcast@gmail.com",
     description="Microbe segmentation in dense colonies graphical interface using Napari",
