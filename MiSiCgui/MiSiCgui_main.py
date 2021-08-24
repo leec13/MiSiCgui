@@ -278,7 +278,7 @@ def main():
         viewer.window.add_dock_widget(meanfunc, area="right")
 
 
-        @magicgui(filename={"mode": "d"})
+        @magicgui(auto_call=True, filename={"mode": "d"})
         def filepicker(filename=Path("~")):
             """doc string test"""
             return filename
