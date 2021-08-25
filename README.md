@@ -236,6 +236,8 @@ Specific commands for MISICgui (respect the order)
 
 6 - click "get_mask" button
 
+Stacks:
+
 This tool works also in "tif stacks" (multiples images in a single Tif file). To process all slides of one stack select "process all", all the slides will be processed with the current settings for width and noise. It means that you have to test some different values in different slices of the stack in order to obtain the better compromize.
 
 Saving outputs :
