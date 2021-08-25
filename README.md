@@ -139,9 +139,11 @@ yp = postprocess_ws(img,yp)
 
 # save 8-bit segmented image and use it as you like
 imsave('segmented.tif', yp.astype(np.uint8))
-```
+''''
 
 ### In case of gpu error, one might need to disabple gpu before importing MiSiC [ os.environ["CUDA_VISIBLE_DEVICES"]="-1" ]
+```
+
 # 3 - MiSiCgui
 
 A Graphic User Interface (GUI) for MiSiC
