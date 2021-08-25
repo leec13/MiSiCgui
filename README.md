@@ -165,6 +165,10 @@ After conda installation open a terminal and :
 
 ## b) Troubleshooting
 
+In some cases it will necessary to remove the old environments of MiSiC and MiSiCgui and force pip install to re-install the package : 
+
+`pip install --upgrade --force-reinstall git+https://github.com/leec13/MiSiCgui.git`
+
 Windows :
 
 Sometimes you will need to re-install numpy
