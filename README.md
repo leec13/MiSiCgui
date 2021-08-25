@@ -217,8 +217,7 @@ $ conda activate MiSiCgui
 $ MISIC
 ```
 
-## d) 
-### How to use it
+## d) How to use it
 The Napari site explain how to use the interface, please see :
 
 ("https://napari.org/tutorials/")
@@ -237,9 +236,12 @@ Specific commands for MISICgui (respect the order)
 
 6 - click "get_mask" button
 
-To process all slides of one stack select "process all"
+Stacks:
+
+This tool works also in "tif stacks" (multiples images in a single Tif file). To process all slides of one stack select "process all", all the slides will be processed with the current settings for width and noise. It means that you have to test some different values in different slices of the stack in order to obtain the better compromize.
 
 Saving outputs :
+
 Each time the "get_mask" button is used the corresponding segmented image is automatically saved to the default output directory, or to the user's home directory.
 The filename will include the source image name and the settings for width and noise parameters.
 If you set a threshold value with the threshold slider to obtain a labels layer (called "seg"), you have to save it by yourself with the button "save labels" in the bottom right panel
