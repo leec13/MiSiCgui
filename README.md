@@ -217,8 +217,7 @@ $ conda activate MiSiCgui
 $ MISIC
 ```
 
-## d) 
-### How to use it
+## d) How to use it
 The Napari site explain how to use the interface, please see :
 
 ("https://napari.org/tutorials/")
