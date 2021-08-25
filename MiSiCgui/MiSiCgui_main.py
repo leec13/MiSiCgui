@@ -36,12 +36,12 @@ from MiSiCgui.utils import *
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
-gdict = {"gDir":"~", "gfilename" : os.path.join("~", "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
-
+home = str(Path.home())
+gdict = {"gDir":home, "gfilename" : os.path.join(home, "out.tif"), "gdims" : None, "width" : None, "gnoise" : None, "gthresh":220, "ginvert" : None, "gpos" : None, "gsave_all" : None}
 
 p = Path(__file__).parents[1]
 p = join(p, "models")
-print(p)
+#print(p)
 modpaths = glob.glob(join(Path(p), "*.py"))
 MODELS = [ basename(f)[:-3] for f in modpaths if isfile(f) and not f.endswith('__init__.py')]
 print(MODELS)
@@ -112,7 +112,7 @@ def seg_img(im, scale=1, noise="0.000", invert=True, frame=0, save=False, thresh
     gshape = "_".join([str(i) for i in gshape])
 
     width = str(gdict["width"])
-
+    #print("save", str(gdict["gfilename"]))
     imsave(str(gdict["gfilename"])+"_W="+width+"_N="+str(noise)+"_DIM="+gshape+"_frame="+savestr+"_mask.tif",(255.0*hyperS).astype(np.uint8))
     print("Finish")
     return((255.0*hyperS).astype(np.uint8))
@@ -124,19 +124,21 @@ def main():
     viewer = napari.Viewer()
 
     def updatelayer(layer):
+        global gdict
         viewer.layers[-1].metadata=gdict
         updatelayer.reset_choices("layer")
         viewer.layers[-1].metadata=gdict
         print("event", layer)
 
     def defaultpath(event_apath):
+        global gdict
         apath = filepicker.filename.value
         gdict["gDir"] = apath
         if len(viewer.layers) > 0 :
             gdict["gfilename"] = os.path.join(apath, viewer.layers.selection.active.name)
     
     def changelabels(event_thr):
-
+        global gdict
         print(make_labels.threshold.value)
         thresh = make_labels.threshold.value
         laynames = [ l.name for l in viewer.layers]
