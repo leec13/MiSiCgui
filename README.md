@@ -239,17 +239,22 @@ Specific commands for MISICgui (respect the order)
 
 To process all slides of one stack select "process all"
 
+Saving outputs :
+Each time the "get_mask" button is used the corresponding segmented image is automatically saved to the default output directory, or to the user's home directory.
+The filename will include the source image name and the settings for width and noise parameters.
+If you set a threshold value with the threshold slider to obtain a labels layer (called "seg"), you have to save it by yourself with the button "save labels" in the bottom right panel
+
 The screenshots below explain each step :
 
-First step, determine a starting value for the mean width parameter
+### First step, determine a starting value for the mean width parameter
 
 !['screen1.png'](./images/screen1.png)
 
-Generate a mask for the current slide or for the whole time lapse stack
+### Generate a mask for the current slide or for the whole time lapse stack
 
 !['screen2.png'](/images/screen2.png)
 
-Generate a threshold image labeled (works also for stacks)
+### Generate a threshold image labeled (works also for stacks)
 
 !['screen3.png'](./images/screen3.png)
 
